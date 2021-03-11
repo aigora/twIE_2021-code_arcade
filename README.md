@@ -1,10 +1,10 @@
-# [Título del trabajo]
+# Code Arcade
 
-[Descripción breve del proyecto a realizar (2-3 frases).]
+Code Arcade es un programa de juegos de arcade.
 
 ## Integrantes del equipo
 
-[Nombres, apellidos, y usuario GitHub de los integrantes del equipo.]
+> - Nicolás Castro García nicoascastrogarcia 
 
 ## Objetivos del trabajo
 
