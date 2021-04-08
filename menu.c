@@ -2,7 +2,7 @@
 int main()
 {
 	char opcion;
-	printf("Selecciona juego: pong(p)\n ahorcado(a)\n tres en ralla(t)\n buscaminas(b)\n hundir la flota(h)\n salir(s)");
+	printf("Selecciona juego: \n Pong(p)\n Ahorcado(a)\n Tres en ralla(t)\n Buscaminas(b)\n Hundir la flota(h)\n Salir(s)\n");
 	do
 	{
 		scanf("%c",&opcion);
@@ -16,9 +16,11 @@ int main()
 				break;
 			case 'b':
 				break;
-			case 'h';
+			case 'h':
 				break;
 		}
 	}
 	while(opcion!='s');
+
+	return 0;
 }
