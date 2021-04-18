@@ -9,16 +9,30 @@ int main()
 		switch(opcion)
 		{
 			case '1':
+//inicia el juego del pong 
 				break;
 			case '2':
+
+//inicia el juego del ahorcado
+
 				break;
 			case '3':
+//inicia el juego del tres en ralla
 				break;
 			case '4':
+
+//inicia el juego del buscaminas
+
 				break;
 			case '5':
+
+//inicia el juego de hundir la flota
+
 				break;
 			case '6':
+
+//inicia el juego del snake
+
 				break;
 		}
 	}
