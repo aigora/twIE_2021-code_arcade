@@ -1,24 +1,42 @@
 #include <stdio.h>
 int main()
 {
-	char opcion;
-	printf("Selecciona juego: pong(p)\n ahorcado(a)\n tres en ralla(t)\n buscaminas(b)\n hundir la flota(h)\n salir(s)");
+	int opcion;
+	printf("Selecciona juego: \n 1.Pong\n 2.Ahorcado\n 3.Tres en ralla\n 4.Buscaminas\n 5.Hundir la flota\n 6.Snake\n 7.Salir\n");
 	do
 	{
-		scanf("%c",&opcion);
+		scanf("%i",&opcion);
 		switch(opcion)
 		{
-			case 'p':
+			case '1':
+//inicia el juego del pong 
 				break;
-			case 'a':
+			case '2':
+
+//inicia el juego del ahorcado
+
 				break;
-			case 't':
+			case '3':
+//inicia el juego del tres en ralla
 				break;
-			case 'b':
+			case '4':
+
+//inicia el juego del buscaminas
+
 				break;
-			case 'h';
+			case '5':
+
+//inicia el juego de hundir la flota
+
+				break;
+			case '6':
+
+//inicia el juego del snake
+
 				break;
 		}
 	}
-	while(opcion!='s');
+	while(opcion!='7');
+
+	return 0;
 }
