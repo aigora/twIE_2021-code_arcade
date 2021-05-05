@@ -113,7 +113,6 @@ void gameloop(char pantalla[V][H], int X, int Y, int inicioj, int finj, int inic
 		dibujar(pantalla);//dibuja en pantalla
 		input(pantalla,&X,&Y,&inicioj,&finj,&inicioia,&finia,&moverX,&moverY,&moveria,&gol);//verificacion y modificacion de posiciones
 		actualizar(pantalla,X,Y,inicioj,finj,inicioia,finia);//actualiza la pantalla
-		sleep(0,001);
 	}while (gol==0);
 }
 
