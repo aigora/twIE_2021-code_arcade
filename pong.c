@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <windows.h>
 #define V 26 //V marca las dimensiones de la vertical
 #define H 60 //H marca las dimensiones de la horizontal
 void inicio(char pantalla[V][H], int X, int Y, int inicioj, int finj, int inicioia, int finia);//
