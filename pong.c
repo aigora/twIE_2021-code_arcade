@@ -26,7 +26,7 @@ int main()
 	inicioj=10;
 	finj= 16;
 	//la raqueta del jugador comienza en la mitad
-	inicioia= 10;
+	inicioia= 5;
 	finia=24;
 	//la raqueta de la ia empieza a la mitad
 	moverX=-1;
