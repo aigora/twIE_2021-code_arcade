@@ -113,7 +113,7 @@ int main()
 					int longitud;
 					char pantalla[V][H];
 					inicioS(&longitud,pantalla,a,b);
-					dibujar(pantalla);
+					leer(pantalla);
 					system("pause");
 					gameloopS(pantalla,longitud,a,b);
 				}
@@ -337,6 +337,7 @@ void gameloopS(char pantalla[V][H], int longitud,snake a[N],comida b)
 	int fin=0;
 	do
 	{
+		system("cls");
 		leer(pantalla);
 		inputS(pantalla,&longitud,&fin,a,b);
 		actualizarS(pantalla,longitud,a,b);
@@ -413,7 +414,7 @@ void actualizarS(char pantalla[V][H], int longitud,snake a[N],comida b)
 void datos2(char pantalla[V][H], int longitud, snake a[N], comida b)
 {
 	int i;
-	for(i=longitud-1;i>0;i--)
+	for(i=(longitud-1);i>0;i--)
 	{
 		a[i].x=a[i-1].x;
 		a[i].y=a[i-1].y;
