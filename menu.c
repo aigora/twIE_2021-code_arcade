@@ -114,8 +114,8 @@ int main()
 					char pantalla[V][H];
 					inicioS(&longitud,pantalla,a,b);
 					leer(pantalla);
-					system("pause");
 					gameloopS(pantalla,longitud,a,b);
+					system("pause");
 				}
 
 //inicia el juego del snake
@@ -339,8 +339,8 @@ void gameloopS(char pantalla[V][H], int longitud,snake a[N],comida b)
 	fin=0;
 	do
 	{
-		system("cls");
-		leer(pantalla);
+		
+		dibujar(pantalla);
 		inputS(pantalla,&longitud,&fin,a,b);
 		actualizarS(pantalla,longitud,a,b);
 	}while(fin==0);
