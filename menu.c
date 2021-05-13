@@ -2,7 +2,21 @@
 #include <stdlib.h>
 #define V 26 //V marca las dimensiones de la vertical
 #define H 60 //H marca las dimensiones de la horizontal
-void inicio(char pantalla[V][H], int X, int Y, int inicioj, int finj, int inicioia, int finia);//
+#define N 100
+
+typedef struct
+{
+	int x,y;
+	int moverX,moverY;
+	char imagen;
+}snake;
+
+typedef struct
+{
+	int x,y;
+}comida;
+
+void inicioP(char pantalla[V][H], int X, int Y, int inicioj, int finj, int inicioia, int finia);//
 void borde(char pantalla[V][H]);//dibuja los bordes de la pantalla rellenando la matriz
 void raquetaj(char pantalla[V][H], int inicioj, int finj);//dibuja la raqueta del jugador
 void raquetaia(char pantalla[V][H], int inicioia, int finia);//dibuja la raqueta de la ia
@@ -12,6 +26,11 @@ void gameloop(char pantalla[V][H], int X, int Y, int inicioj, int finj, int inic
 void dibujar(char pantalla[V][H]);
 void input(char pantalla[V][H], int *X, int *Y, int *inicioj, int *finj, int *inicioia, int *finia, int *moverX, int *moverY, int *moveria,int *gol);
 void actualizar(char pantalla[V][H], int X, int Y, int inicioj, int finj, int inicioia, int finia);
+void inicioS(int *longitud, char pantalla[V][H]);
+void datos(char pantalla[V][H],int longitud);
+
+
+
 int main()
 {
 	int opcion;
@@ -52,7 +71,7 @@ int main()
 	moverX=-1;
 	moverY=-1;
 	moveria=-1;
-	inicio(pantalla,X,Y,inicioj,finj,inicioia,finia);
+	inicioP(pantalla,X,Y,inicioj,finj,inicioia,finia);
 	gameloop(pantalla,X,Y,inicioj,finj,inicioia,finia,moverX,moverY,moveria);
 	system ("pause");
 	}
@@ -84,6 +103,15 @@ int main()
 
 				break;
 			case 6:
+				{
+					snake a[N];
+					comida b;
+					int longitud;
+					char pantalla[V][H];
+					inicioS(&longitud,pantalla);
+					dibujar(pantalla);
+					system("pause");
+				}
 
 //inicia el juego del snake
 
@@ -94,7 +122,7 @@ int main()
 
 	return 0;
 }
-	void inicio(char pantalla[V][H], int X, int Y, int inicioj, int finj, int inicioia, int finia)
+	void inicioP(char pantalla[V][H], int X, int Y, int inicioj, int finj, int inicioia, int finia)
 {
 	borde(pantalla);
 	raquetaj(pantalla, inicioj,finj);
@@ -251,4 +279,54 @@ void actualizar(char pantalla[V][H], int X, int Y, int inicioj, int finj, int in
 	raquetaj(pantalla, inicioj,finj);
 	raquetaia(pantalla, inicioia,finia);
 	pelota(pantalla, X, Y);
+}
+
+void inicioS(int *longitud, char pantalla[V][H])
+{
+	int i;
+	snake a[N];
+	comida b;
+	a[0].x =21;//coordenadas inicio serpiente
+	a[0].y = 5;
+	*longitud=3;//longitud inicial serpiente
+	srand(time(NULL));//coordenadas comida
+	b.x=rand()%(H-1);
+	b.y=rand()%(V-1);
+	//controla que la comida no aparezca en los bordes
+	while(b.x==0)
+	{
+		b.x=rand()%(H-1);	
+	}
+	while(b.y==0)
+	{
+		b.y=rand()%(V-1);
+	}
+	//al inicio avanza hacia la izquierda
+	for(i=0;i<*longitud;i++)
+	{
+		a[i].moverX=-1;
+		a[i].moverY=0;
+	}
+	borde(pantalla);
+	datos(pantalla,*longitud);
+}
+
+void datos(char pantalla[V][H],int longitud)
+{
+	int i;
+	snake a[N];
+	comida b;
+	for(i=1;i<longitud;i++)
+	{
+		a[i].x=a[i-1].x+1;//cuerpo de la serpiente
+		a[i].y=a[i-1].y;
+		a[i].imagen='Z';
+	}
+	a[0].imagen='O';
+	for(i=0;i<longitud;i++)
+	{
+		pantalla[a[i].y][a[i].x]=a[i].imagen;//meto imagen de la serpiente
+	}
+	pantalla[b.y][b.x]='S';
+
 }
