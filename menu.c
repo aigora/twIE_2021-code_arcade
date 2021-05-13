@@ -148,6 +148,7 @@ void borde(char pantalla[V][H])
 			pantalla[i][j]='|';
 			else
 			pantalla[i][j]=' ';
+		
 		}
 	}
 }
@@ -289,9 +290,9 @@ void actualizarP(char pantalla[V][H], int X, int Y, int inicioj, int finj, int i
 void inicioS(int *longitud, char pantalla[V][H],snake a[N],comida b)
 {
 	int i;
-	a[0].x =21;//coordenadas inicio serpiente
-	a[0].y = 5;
-	*longitud=3;//longitud inicial serpiente
+	a[0].x =30;//coordenadas inicio serpiente
+	a[0].y = 13;
+	*longitud=4;//longitud inicial serpiente
 	srand(time(NULL));//coordenadas comida
 	b.x=rand()%(H-1);
 	b.y=rand()%(V-1);
@@ -334,7 +335,8 @@ void datos(char pantalla[V][H],int longitud, snake a[N], comida b)
 
 void gameloopS(char pantalla[V][H], int longitud,snake a[N],comida b)
 {
-	int fin=0;
+	int fin;
+	fin=0;
 	do
 	{
 		system("cls");
@@ -344,11 +346,11 @@ void gameloopS(char pantalla[V][H], int longitud,snake a[N],comida b)
 	}while(fin==0);
 }
 
-void inputS(char pantalla[V][H], int *longitud, int*fin, snake a[N],comida b)
+void inputS(char pantalla[V][H], int *longitud, int *fin, snake a[N],comida b)
 {
 	int i;
 	char tecla;
-	if(a[0].x==0||a[0].x==H-1||a[0].y==0||a[0].y==V-1)//comprueba si se choca con los bordes
+	if(a[0].x==0||a[0].x==(H-1)||a[0].y==0||a[0].y==(V-1))//comprueba si se choca con los bordes
 	{
 		*fin =1;
 	}
@@ -381,22 +383,22 @@ void inputS(char pantalla[V][H], int *longitud, int*fin, snake a[N],comida b)
 		if(kbhit()==1)
 		{
 			tecla = getch();
-			if(tecla=='X'&&a[0].moverY!=-1)
+			if(tecla=='x'&&a[0].moverY!=-1)
 			{
 				a[0].moverX=0;
 				a[0].moverY=1;
 			}
-			if(tecla=='W'&&a[0].moverY!=1)
+			if(tecla=='w'&&a[0].moverY!=1)
 			{
 				a[0].moverX=0;
 				a[0].moverY=-1;
 			}
-			if(tecla=='A'&&a[0].moverX!=1)
+			if(tecla=='a'&&a[0].moverX!=1)
 			{
 				a[0].moverY=-1;
 				a[0].moverY=0;
 			}
-			if(tecla=='D'&&a[0].moverX!=-1)
+			if(tecla=='d'&&a[0].moverX!=-1)
 			{
 				a[0].moverY=1;
 				a[0].moverY=0;
@@ -407,7 +409,7 @@ void inputS(char pantalla[V][H], int *longitud, int*fin, snake a[N],comida b)
 
 void actualizarS(char pantalla[V][H], int longitud,snake a[N],comida b)
 {
-	leer(pantalla);
+	borde(pantalla);
 	datos2(pantalla,longitud,a,b);
 }
 
