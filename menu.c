@@ -26,11 +26,13 @@ void leer(char pantalla[V][H]);//lee la matriz
 void gameloopP(char pantalla[V][H], int X, int Y, int inicioj, int finj, int inicioia, int finia, int moverX, int moverY, int moveria);
 void dibujar(char pantalla[V][H]);
 void inputP(char pantalla[V][H], int *X, int *Y, int *inicioj, int *finj, int *inicioia, int *finia, int *moverX, int *moverY, int *moveria,int *gol);
-void actualizar(char pantalla[V][H], int X, int Y, int inicioj, int finj, int inicioia, int finia);
+void actualizarP(char pantalla[V][H], int X, int Y, int inicioj, int finj, int inicioia, int finia);
 void inicioS(int *longitud, char pantalla[V][H],snake a[N],comida b);
 void datos(char pantalla[V][H],int longitud, snake a[N], comida b);
 void inputS(char pantalla[V][H], int *longitud, int*fin, snake a[N],comida b);
-
+void actualizarS(char pantalla[V][H], int longitud,snake a[N],comida b);
+void datos2(char pantalla[V][H], int longitud, snake a[N], comida b);
+void gameloopS(char pantalla[V][H], int longitud,snake a[N],comida b);
 
 
 int main()
@@ -199,7 +201,7 @@ void gameloopP(char pantalla[V][H], int X, int Y, int inicioj, int finj, int ini
 	{
 		dibujar(pantalla);//dibuja en pantalla
 		inputP(pantalla,&X,&Y,&inicioj,&finj,&inicioia,&finia,&moverX,&moverY,&moveria,&gol);//verificacion y modificacion de posiciones
-		actualizar(pantalla,X,Y,inicioj,finj,inicioia,finia);//actualiza la pantalla
+		actualizarP(pantalla,X,Y,inicioj,finj,inicioia,finia);//actualiza la pantalla
 	}while (gol==0);
 }
 
@@ -276,7 +278,7 @@ void inputP(char pantalla[V][H], int *X, int *Y, int *inicioj, int *finj, int *i
 	}
 }
 
-void actualizar(char pantalla[V][H], int X, int Y, int inicioj, int finj, int inicioia, int finia)
+void actualizarP(char pantalla[V][H], int X, int Y, int inicioj, int finj, int inicioia, int finia)
 {
 	borde(pantalla);
 	raquetaj(pantalla, inicioj,finj);
@@ -305,7 +307,7 @@ void inicioS(int *longitud, char pantalla[V][H],snake a[N],comida b)
 	//al inicio avanza hacia la izquierda
 	for(i=0;i<*longitud;i++)
 	{
-		a[i].moverX=-1;
+		a[i].moverX=1;
 		a[i].moverY=0;
 	}
 	borde(pantalla);
@@ -317,7 +319,7 @@ void datos(char pantalla[V][H],int longitud, snake a[N], comida b)
 	int i;
 	for(i=1;i<longitud;i++)
 	{
-		a[i].x=a[i-1].x+1;//cuerpo de la serpiente
+		a[i].x=a[i-1].x-1;//cuerpo de la serpiente
 		a[i].y=a[i-1].y;
 		a[i].imagen='Z';
 	}
@@ -337,6 +339,7 @@ void gameloopS(char pantalla[V][H], int longitud,snake a[N],comida b)
 	{
 		leer(pantalla);
 		inputS(pantalla,&longitud,&fin,a,b);
+		actualizarS(pantalla,longitud,a,b);
 	}while(fin==0);
 }
 
@@ -377,26 +380,49 @@ void inputS(char pantalla[V][H], int *longitud, int*fin, snake a[N],comida b)
 		if(kbhit()==1)
 		{
 			tecla = getch();
-			if(tecla=='X')
+			if(tecla=='X'&&a[0].moverY!=-1)
 			{
 				a[0].moverX=0;
 				a[0].moverY=1;
 			}
-			if(tecla=='W')
+			if(tecla=='W'&&a[0].moverY!=1)
 			{
 				a[0].moverX=0;
 				a[0].moverY=-1;
 			}
-			if(tecla=='A')
+			if(tecla=='A'&&a[0].moverX!=1)
 			{
 				a[0].moverY=-1;
 				a[0].moverY=0;
 			}
-			if(tecla=='D')
+			if(tecla=='D'&&a[0].moverX!=-1)
 			{
 				a[0].moverY=1;
 				a[0].moverY=0;
 			}
 		}
 	}
+}
+
+void actualizarS(char pantalla[V][H], int longitud,snake a[N],comida b)
+{
+	leer(pantalla);
+	datos2(pantalla,longitud,a,b);
+}
+
+void datos2(char pantalla[V][H], int longitud, snake a[N], comida b)
+{
+	int i;
+	for(i=longitud-1;i>0;i--)
+	{
+		a[i].x=a[i-1].x;
+		a[i].y=a[i-1].y;
+	}
+	a[0].x +=a[0].moverX;
+	a[0].y +=a[0].moverY;
+	for(i=0;i<longitud;i++)
+	{
+		pantalla[a[i].y][a[i].x]=a[i].imagen;
+	}
+	pantalla[b.y][b.x]='S';
 }
