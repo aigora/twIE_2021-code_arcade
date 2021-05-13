@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #define V 26 //V marca las dimensiones de la vertical
 #define H 60 //H marca las dimensiones de la horizontal
 #define N 100
@@ -22,12 +23,13 @@ void raquetaj(char pantalla[V][H], int inicioj, int finj);//dibuja la raqueta de
 void raquetaia(char pantalla[V][H], int inicioia, int finia);//dibuja la raqueta de la ia
 void pelota(char pantalla[V][H], int X, int Y);//dibuja la pelota
 void leer(char pantalla[V][H]);//lee la matriz
-void gameloop(char pantalla[V][H], int X, int Y, int inicioj, int finj, int inicioia, int finia, int moverX, int moverY, int moveria);
+void gameloopP(char pantalla[V][H], int X, int Y, int inicioj, int finj, int inicioia, int finia, int moverX, int moverY, int moveria);
 void dibujar(char pantalla[V][H]);
-void input(char pantalla[V][H], int *X, int *Y, int *inicioj, int *finj, int *inicioia, int *finia, int *moverX, int *moverY, int *moveria,int *gol);
+void inputP(char pantalla[V][H], int *X, int *Y, int *inicioj, int *finj, int *inicioia, int *finia, int *moverX, int *moverY, int *moveria,int *gol);
 void actualizar(char pantalla[V][H], int X, int Y, int inicioj, int finj, int inicioia, int finia);
-void inicioS(int *longitud, char pantalla[V][H]);
-void datos(char pantalla[V][H],int longitud);
+void inicioS(int *longitud, char pantalla[V][H],snake a[N],comida b);
+void datos(char pantalla[V][H],int longitud, snake a[N], comida b);
+void inputS(char pantalla[V][H], int *longitud, int*fin, snake a[N],comida b);
 
 
 
@@ -72,7 +74,7 @@ int main()
 	moverY=-1;
 	moveria=-1;
 	inicioP(pantalla,X,Y,inicioj,finj,inicioia,finia);
-	gameloop(pantalla,X,Y,inicioj,finj,inicioia,finia,moverX,moverY,moveria);
+	gameloopP(pantalla,X,Y,inicioj,finj,inicioia,finia,moverX,moverY,moveria);
 	system ("pause");
 	}
 	break;
@@ -108,9 +110,10 @@ int main()
 					comida b;
 					int longitud;
 					char pantalla[V][H];
-					inicioS(&longitud,pantalla);
+					inicioS(&longitud,pantalla,a,b);
 					dibujar(pantalla);
 					system("pause");
+					gameloopS(pantalla,longitud,a,b);
 				}
 
 //inicia el juego del snake
@@ -188,14 +191,14 @@ void leer(char pantalla[V][H])
 		printf("\n");
 	}
 }
-void gameloop(char pantalla[V][H], int X, int Y, int inicioj, int finj, int inicioia, int finia, int moverX, int moverY, int moveria)
+void gameloopP(char pantalla[V][H], int X, int Y, int inicioj, int finj, int inicioia, int finia, int moverX, int moverY, int moveria)
 {
 	int gol;
 	gol= 0;
 	do
 	{
 		dibujar(pantalla);//dibuja en pantalla
-		input(pantalla,&X,&Y,&inicioj,&finj,&inicioia,&finia,&moverX,&moverY,&moveria,&gol);//verificacion y modificacion de posiciones
+		inputP(pantalla,&X,&Y,&inicioj,&finj,&inicioia,&finia,&moverX,&moverY,&moveria,&gol);//verificacion y modificacion de posiciones
 		actualizar(pantalla,X,Y,inicioj,finj,inicioia,finia);//actualiza la pantalla
 	}while (gol==0);
 }
@@ -206,7 +209,7 @@ void dibujar(char pantalla[V][H])
 	leer(pantalla);
 }
 
-void input(char pantalla[V][H], int *X, int *Y, int *inicioj, int *finj, int *inicioia, int *finia, int *moverX, int *moverY, int *moveria,int*gol)
+void inputP(char pantalla[V][H], int *X, int *Y, int *inicioj, int *finj, int *inicioia, int *finia, int *moverX, int *moverY, int *moveria,int*gol)
 {
 	int i;
 	char tecla;
@@ -281,11 +284,9 @@ void actualizar(char pantalla[V][H], int X, int Y, int inicioj, int finj, int in
 	pelota(pantalla, X, Y);
 }
 
-void inicioS(int *longitud, char pantalla[V][H])
+void inicioS(int *longitud, char pantalla[V][H],snake a[N],comida b)
 {
 	int i;
-	snake a[N];
-	comida b;
 	a[0].x =21;//coordenadas inicio serpiente
 	a[0].y = 5;
 	*longitud=3;//longitud inicial serpiente
@@ -308,14 +309,12 @@ void inicioS(int *longitud, char pantalla[V][H])
 		a[i].moverY=0;
 	}
 	borde(pantalla);
-	datos(pantalla,*longitud);
+	datos(pantalla,*longitud,a,b);
 }
 
-void datos(char pantalla[V][H],int longitud)
+void datos(char pantalla[V][H],int longitud, snake a[N], comida b)
 {
 	int i;
-	snake a[N];
-	comida b;
 	for(i=1;i<longitud;i++)
 	{
 		a[i].x=a[i-1].x+1;//cuerpo de la serpiente
@@ -329,4 +328,75 @@ void datos(char pantalla[V][H],int longitud)
 	}
 	pantalla[b.y][b.x]='S';
 
+}
+
+void gameloopS(char pantalla[V][H], int longitud,snake a[N],comida b)
+{
+	int fin=0;
+	do
+	{
+		leer(pantalla);
+		inputS(pantalla,&longitud,&fin,a,b);
+	}while(fin==0);
+}
+
+void inputS(char pantalla[V][H], int *longitud, int*fin, snake a[N],comida b)
+{
+	int i;
+	char tecla;
+	if(a[0].x==0||a[0].x==H-1||a[0].y==0||a[0].y==V-1)//comprueba si se choca con los bordes
+	{
+		*fin =1;
+	}
+	for (i=1;i<*longitud&&*fin==0;i++)
+	{
+		if(a[0].x==a[i].x&&a[0].y==a[i].y)//comprueba si la serpiente se choca con si misma
+		{
+			*fin=1;
+		}
+	}
+	if(a[0].x==b.x&&a[0].y==b.y)
+	{
+		*longitud +=1;
+		a[*longitud-1].imagen='Z';
+		b.x=rand()%(H-1);
+		b.y=rand()%(V-1);
+		//controla que la comida no aparezca en los bordes
+		while(b.x==0)
+		{
+			b.x=rand()%(H-1);	
+		}
+		while(b.y==0)
+		{
+			b.y=rand()%(V-1);
+		}
+		
+	}
+	if(*fin==0)
+	{
+		if(kbhit()==1)
+		{
+			tecla = getch();
+			if(tecla=='X')
+			{
+				a[0].moverX=0;
+				a[0].moverY=1;
+			}
+			if(tecla=='W')
+			{
+				a[0].moverX=0;
+				a[0].moverY=-1;
+			}
+			if(tecla=='A')
+			{
+				a[0].moverY=-1;
+				a[0].moverY=0;
+			}
+			if(tecla=='D')
+			{
+				a[0].moverY=1;
+				a[0].moverY=0;
+			}
+		}
+	}
 }
