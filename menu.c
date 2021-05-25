@@ -45,20 +45,7 @@ void inputS(char pantalla[V][H], int *longitud, int*fin, snake a[N],comida b);
 void actualizarS(char pantalla[V][H], int longitud,snake a[N],comida b);
 void datos2(char pantalla[V][H], int longitud, snake a[N], comida b);
 void gameloopS(char pantalla[V][H], int longitud,snake a[N],comida b);
-void principal(char adivinapalabra[E], char cadena[E]);
-int numaleatorio(int n);
-int ahorcado(char adivinapalabra[E], char cadena[E]);
-int imprime_ahorcado(int intentos);
-void Puntuaciones(usuario lista_punt[D],FILE *leer);
-void modoPrincipiante(void);
-void modoExperto(void);
-void loop (char c[3][3]);
-void PrimeraVez (char c[3][3]);
-void mesa (char c[3][3]);
-void Yo (char c[3][3], int jugador);
-void Inteligencia_Artificial (char c[3][3]);
-int winner (char c[3][3]);
-void cas_ocupada (char c[3][3], char aux, char signo);
+
 
 
 int main()
@@ -67,7 +54,7 @@ int main()
 
 	do
 	{
-	printf("Selecciona juego: \n 1.Pong\n 2.Ahorcado\n 3.Tres en ralla\n 4.Buscaminas\n 5.Hundir la flota\n 6.Snake\n 7.Salir\n");
+	printf("Selecciona juego: \n 1.Pong\n 2.Ahorcado\n 3.Tres en ralla\n 4.Piedra, papel o tijera\n 5.Snake\n 6.Salir\n");
 	scanf("%i",&opcion);
 		switch(opcion)
 		{
@@ -116,60 +103,7 @@ int main()
 				break;
 			case 2:
 				{
-				int aleatorio=0;
-	
-				pal peliculas[10]={"INTERSTELLAR" , "INFILTRADOS" , "HARRY POTTER" , "TITANIC" , "TRANSFORMERS" , "STAR WARS" , "GLADIATOR" , "JURASSIC PARK" , "EL CABALLERO OSCURO" , "TOY STORY"};
-				pal series[10]={"JUEGO DE TRONOS" , "STRANGER THINGS" , "RIVERDALE" , "FRIENDS" , "VIKINGOS" , "LA QUE SE AVECINA" , "LA CASA DE PAPEL" , "PEAKY BLINDERS" , "CASTLE" , "THE BIG BANG THEORY"};
-				pal musica[10]={"DUA LIPA" , "JUSTIN BIEBER" , "DRAKE" , "MICHAEL JACKSON" , "J BALVIN" , "LADY GAGA" , "AVICII" , "MADONNA" , "RIHANNA" , "EMINEM"};
-				pal deportes[10]={"FUTBOL" , "BALONCESTO" , "PADEL" , "ESCALADA" , "TENIS" , "BOXEO" , "CICLISMO" , "SURF" , "RUGBY" , "NATACION"};
-				char letra;
-				char letrausuario[E]=" ";
-				printf("Bienvenido al Ahorcado\n");
-				system ("PAUSE");
-				system("CLS");
-				printf("El objetivo es adivinar la palabra con el minimo numero de fallos\n");
-				system("PAUSE"); 
-				system("CLS");
-				printf("Selecciona la categoria de la frase:\na.Peliculas\nb.Series\nc.Artistas Musicales\nd.Deportes\n");
-					switch(getch()){
-						
-						case 'a':
-						case 'A':
-							system("CLS");
-							printf("Has elegido la categoria de Peliculas\n");
-							aleatorio = numaleatorio(10);
-							principal(peliculas[aleatorio].palabra, letrausuario);
-							break;
-							
-						case 'b':
-						case 'B':
-							system("CLS");
-							printf("Has elegido la categoria de Series\n");
-							aleatorio = numaleatorio(10);
-							principal(series[aleatorio].palabra, letrausuario);
-							break;
-							
-						case 'c':
-						case 'C':
-							system("CLS");
-							printf("Has elegido la categoria de Artistas Musicales\n");
-							aleatorio = numaleatorio(10);
-							principal(musica[aleatorio].palabra, letrausuario);
-							break;
-							
-						case 'd':
-						case 'D':
-							system("CLS");
-							printf("Has elegido la categoria de Deportes\n");
-							aleatorio = numaleatorio(10);
-							principal(deportes[aleatorio].palabra, letrausuario);
-							break;
-							
-						default:
-						printf("Escoge una opcion valida\n");
-						system("PAUSE");		
-					}
-					
+				
 				}
 
 //inicia el juego del ahorcado
@@ -178,11 +112,7 @@ int main()
 			case 3:
 				{
 				
-				    char c[3][3];
-				    
-				    loop (c);
-				
-				    system ("pause");
+
 				
 				
 				}
@@ -190,32 +120,123 @@ int main()
 				break;
 			case 4:
 				{
-				   int o;
-				    printf("Estas jugando al Buscaminas!\n");
-				    printf("Selecciona un modo de juego:\n");
-				    printf("(1)Principiante \n(2)Experto\n");
-				    scanf(" %i", &o);
-				    switch(o)
-				    {
-				        case 1:
-				            modoPrincipiante();
-				        break;
-				        
-				        case 2:
-				            modoExperto();
-				        break;
-				    }
-				}
+					 	int i; //Contador
+					    int Jugador=0, Maquina; //Jugadas elegidas
+					    int PJ=0, PM=0; // Puntuacion de cada uno
+					    char Papel[]="Papel", Tijera[]="Tijera", Piedra[]="Piedra"; //Opciones de jugada
+					    
+					    printf("Estas jugando al PIEDRA, PAPEL O TIJERA!!\n");
+					    printf("Vamos a jugar al mejor de 5\n");
+					    printf("¿Estas preparado?\n");
+					    
+					    for(i=1; i<6; i++){
+					    do{
+					    printf("-Elige tu jugada:\n");
+					    printf("1. Papel\n2. Tijera\n3. Piedra\n\n");
+					    scanf("%d", &Jugador);
+					    } while(Jugador!=1 && Jugador!=2 && Jugador!=3);
+					    
+					    Maquina=(rand()%3)+1;
+					    
+					    if(Jugador==1 && Maquina==1){
+					        printf("\n%i.----------------\n", i);
+					        printf("Tu opcion fue %s y la de tu oponente fue %s", Papel, Papel);
+					        printf("\nHabeis EMPATADO en esta ronda\n");
+					        printf("Jugador - Maquina : %i - %i\n", PJ, PM);
+					        printf("%i.----------------\n\n", i);
+					    }
+					    if(Jugador==2 && Maquina==2){
+					        printf("\n%i.----------------\n", i);
+					        printf("Tu opcion fue %s y la de tu oponente fue %s", Tijera, Tijera);
+					        printf("\nHabeis EMPATADO en esta ronda\n");
+					        printf("Jugador - Maquina : %i - %i\n", PJ, PM);
+					        printf("%i.----------------\n\n", i);
+					    }
+					    if(Jugador==3 && Maquina==3){
+					        printf("\n%i.----------------\n", i);
+					        printf("Tu opcion fue %s y la de tu oponente fue %s", Piedra, Piedra);
+					        printf("\nHabeis EMPATADO en esta ronda\n");
+					        printf("Jugador - Maquina : %i - %i\n", PJ, PM);
+					        printf("%i.----------------\n\n", i);
+					    }
+					    if((Jugador==1) && (Maquina==2)){
+					        PM++;
+					        printf("\n%i.----------------\n", i);
+					        printf("Tu opcion fue %s y la de tu oponente fue %s", Papel, Tijera);
+					        printf("\nLo siento, has PERDIDO esta ronda!\n");
+					        printf("Jugador - Maquina : %i - %i\n", PJ, PM);
+					        printf("%i.----------------\n\n", i);
+					    }
+					    if((Jugador==1) && (Maquina==3)){
+					        PJ++;
+					        printf("\n%i.----------------\n", i);
+					        printf("Tu opcion fue %s y la de tu oponente fue %s", Papel, Piedra);
+					        printf("\nEnhorabuena, has GANADO esta ronda!\n");
+					        printf("Jugador - Maquina : %i - %i\n", PJ, PM);
+					        printf("%i.----------------\n\n", i);
+					    }
+					    if((Jugador==2) && (Maquina==1)){
+					        PJ++;
+					        printf("\n%i.----------------\n", i);
+					        printf("Tu opcion fue %s y la de tu oponente fue %s", Tijera, Papel);
+					        printf("\nEnhorabuena, has GANADO esta ronda!\n");
+					        printf("Jugador - Maquina : %i - %i\n", PJ, PM);
+					        printf("%i.----------------\n\n", i);
+					    }
+					    if((Jugador==2) && (Maquina==3)){
+					        PM++;
+					        printf("\n%i.----------------\n", i);
+					        printf("Tu opcion fue %s y la de tu oponente fue %s", Tijera, Piedra);
+					        printf("\nLo siento, has PERDIDO esta ronda!\n");
+					        printf("Jugador - Maquina : %i - %i\n", PJ, PM);
+					        printf("%i.----------------\n\n", i);
+					    }
+					    if((Jugador==3) && (Maquina==2)){
+					        PJ++;
+					        printf("\n%i.----------------\n", i);
+					        printf("Tu opcion fue %s y la de tu oponente fue %s", Piedra, Tijera);
+					        printf("\nEnhorabuena, has GANADO esta ronda!\n");
+					        printf("Jugador - Maquina : %i - %i\n", PJ, PM);
+					        printf("%i.----------------\n\n", i);
+					        
+					    }
+					    if((Jugador==3) && (Maquina==1)){
+					        PM++;
+					        printf("\n%i.----------------\n", i);
+					        printf("Tu opcion fue %s y la de tu oponente fue %s", Piedra, Papel);
+					        printf("\nLo siento, has PERDIDO esta ronda!\n");
+					        printf("Jugador - Maquina : %i - %i\n", PJ, PM);
+					        printf("%i.----------------\n\n", i);
+					    }
+					        PJ=PJ;
+					        PM=PM;
+					    }
+					    
+					    printf("-------------------------------\n");
+					    printf("Ha terminado el juego!!\n ");
+					    
+					    if((PJ>PM)){
+					        printf("Has GANADO la partida, este ha sido el resultado final:\n");
+					        printf("Jugador - Maquina : %i - %i\n", PJ, PM);
+					    }
+					    if((PJ<PM)){
+					        printf("Has PERDIDO la partida, este ha sido el resultado final:\n");
+					        printf("Jugador - Maquina : %i - %i\n", PJ, PM);
+					    }
+					    if(PJ==PM){
+					        printf("Habeis EMPATADO la partida, este ha sido el resultado final:\n");
+					        printf("Jugador - Maquina : %i - %i\n", PJ, PM);
+					    }
+					    
+					    
+					}
+
 
 //inicia el juego del buscaminas
 
 				break;
+
 			case 5:
-
-//inicia el juego de hundir la flota
-
-				break;
-			case 6:
 				{
 					snake a[N];
 					comida b;
@@ -232,7 +253,7 @@ int main()
 				break;
 		}
 	}
-	while(opcion!='7');
+	while(opcion!='6');
 
 	return 0;
 }
@@ -539,779 +560,4 @@ void datos2(char pantalla[V][H], int longitud, snake a[N], comida b)
 	pantalla[b.y][b.x]='S';
 }
 
-void principal(char adivinapalabra[30], char cadena[30])
-	{
-	int intentos=7, fallos=0, i, puntuacion,si_perdido;
-	i=0;
-	
-	char nombre[20]="";
-	usuario lista_puntuaciones[D]={{"iniciar",0}};
-	FILE *agregar=fopen("puntuacion_ahorcado.txt","a");
-	
-		if(agregar==NULL){
-		printf("\n\t Error");
-		exit(1);
-	}
-	
-	float t1=clock(), t2, tiempo_total;
-	
-	while(1){
-		fallos=ahorcado(adivinapalabra, cadena);
-		
-		if(fallos==-1){
-			printf("\nHAS GANADO!!\n");
-			t2=clock();
-			tiempo_total = (t2-t1)/CLOCKS_PER_SEC;
-			puntuacion=1000000/(int)tiempo_total*intentos;
-			printf("Has tardado %f\nTu puntuacion ha sido de %i\n", tiempo_total, puntuacion);
-			printf("Introduce tu nombre:\n");
-			scanf(" %[^\n]", nombre);
-			fprintf(agregar, "%s.%i\n", nombre, puntuacion);
-			fclose(agregar);
-			FILE *leer=fopen("puntuacion_ahorcado.txt","r");
-			Puntuaciones(lista_puntuaciones, leer);
-			break;
-		}
-		intentos-=fallos;
-		printf("\n\n");
-		si_perdido=imprime_ahorcado(intentos);
-		
-		if(si_perdido==1) break;
-		printf("\nLas letras introducidas que llevas son: %s\n", cadena);
-		printf("Introduce una letra:\n");
-		cadena[i]=getch();
-		system("CLS");				
-		i++;					
-	}
-}
-
-int numaleatorio(int n){
-srand(time(NULL));
-int i;
-	i = rand()%n;
-	return i;
-}
-
-int ahorcado(char adivinapalabra[30], char letrausuario[30]){
-	
-	int i, n,Pregunta_fallo, iguales, ganado=1, dif='A'-'a',ultima_letra_usuario=strlen(letrausuario);
-	
-	for(i=0; adivinapalabra[i]!='\0'; i++){
-		
-		for(n=0, iguales=0; n<ultima_letra_usuario; n++){
-			if(letrausuario[n]==adivinapalabra[i] || letrausuario[n]==adivinapalabra[i]-dif){
-				iguales = 1;
-			}
-		}
-		if(iguales==1){
-			printf("%c ", adivinapalabra[i]);
-		}
-		else if(adivinapalabra[i]==' '){
-			printf("   "); 
-		}
-		else{
-			ganado=0;
-					
-			if( adivinapalabra[i]>= 'A' &&  adivinapalabra[i]<= 'Z'){
-				printf("_ ");	
-			}
-		
-			if(adivinapalabra[i] >= 'a' && adivinapalabra[i] <= 'z'){
-				printf("_ ");
-			}
-		}
-	}
-	if(ganado==1){
-		
-		return -1;
-	}
-	if(strlen(adivinapalabra)!=1)
-		for(i=0,Pregunta_fallo=1;adivinapalabra[i]!='\0';i++)
-			if(letrausuario[ultima_letra_usuario-1]==adivinapalabra[i] || letrausuario[ultima_letra_usuario-1]==adivinapalabra[i]-dif)
-				Pregunta_fallo=0;
-		
-	return Pregunta_fallo;
-}
-int imprime_ahorcado(int intentos){
-	if(intentos==7){
-	printf("Te quedan %d intentos\n\n", intentos);
-				printf(" _______\n/        |\n|\n|\n|\n|\n|\n|__\n");	
-	}
-	
-	if(intentos==6){
-	printf("Te quedan %d intentos\n\n", intentos);
-				printf(" _______\n/        |\n|      (x_x)\n|\n|\n|\n|\n|__\n");	
-	}
-	
-	if(intentos==5){
-	printf("Te quedan %d intentos\n\n", intentos);
-				printf(" _______\n/        |\n|      (x_x)\n|        |\n|\n|\n|\n|__\n");
-	}
-	
-	if(intentos==4){
-	printf("Te quedan %d intentos\n\n", intentos);
-				printf(" _______\n/        |\n|      (x_x)\n|       _| \n|       \n|\n|\n|__\n");
-	}
-																				
-	if(intentos==3){																				 
-	printf("Te quedan %d intentos\n\n", intentos);					 
-				printf(" _______\n/        |\n|      (x_x)\n|       _|_ \n|       \n|\n|\n|__\n");
-	}
-				
-	if(intentos==2){
-	printf("Te quedan %d intentos\n\n", intentos);
-				printf(" _______\n/        |\n|      (x_x)\n|       _|_ \n|        |\n|\n|\n|__\n");
-	}
-	
-	if(intentos==1){
-	printf("Te quedan %d intentos\n\n", intentos);
-				printf(" _______\n/        |\n|      (x_x)\n|       _|_ \n|        | \n|       |  \n|\n|__\n");
-	}
-	
-	if(intentos==0){
-				printf(" _______\n/        |\n|      (x_x)\n|       _|_ \n|        | \n|       | |\n|\n|__\n");
-	printf("HAS PERDIDO :(\n");	
-	return 1;
-	}
-	
-	return 0;
-}
-
-void Puntuaciones(usuario lista_punt[D],FILE *leer_archivo){
-	usuario aux;
-	int i=0,j;
-	
-	while(fscanf(leer_archivo,"%[^.].%i\n",lista_punt[i].nombre,&lista_punt[i].punt)!=EOF)
-		i++;
-		
-	for(i=0;lista_punt[i].punt!=0;i++)
-		for(j=i+1;lista_punt[j].punt!=0;j++)
-			if(lista_punt[i].punt<lista_punt[j].punt){
-				aux=lista_punt[i];
-				lista_punt[i]=lista_punt[j];
-				lista_punt[j]=aux;
-			}
-						system("cls");
-		printf("\t   Nombre \t Puntuacion");
-		for(i=0;lista_punt[i].punt!=0&&i<10;i++)
-			printf("\n\t%i- %s \t %i",i+1,lista_punt[i].nombre,lista_punt[i].punt);
-}
-
-void modoPrincipiante()
-{
-    int i, j;
-    int a1[2], a2[2], a3[2], a4[2], a5[2], a6[2];
-    int mesa[6][6];
-    int mesaInicial[6][6];
-    int py, px;
-    int resultado = 0;
-    int numIntentos=0;
-    
-    printf("Has elegido modo Principiante, por lo que tu mesa es 6x6:\n");
-    
-    for(i=0; i<6; i++)
-    {
-        for(j=0; j<6; j++)
-        {
-            mesa[i][j]=0;
-            printf("/ ");
-                if(j==5)
-                    printf("\n");
-        }
-    }
-    printf("Recuerda de tienes 6 minas que evitar, BUENA SUERTE!!\n");
-    sleep(2);
-    
-    for(i=0; i<6; i++)
-    {
-        for(j=0; j<6; j++)
-        {
-            mesaInicial[i][j]=0;
-        }
-    }
-    srand( (unsigned int) time(NULL) );
-    a1[0]=rand()%6;
-    a1[1]=rand()%6;
-    
-    do{
-        a2[0]=rand()%6;
-        a2[1]=rand()%6;
-    }while(a2[0]==a1[0] && a2[1]==a1[1]);
-    
-    do{
-        a3[0]=rand()%6;
-        a3[1]=rand()%6;
-    }while((a3[0]==a1[0] && a3[1]==a1[1]) || (a3[0]==a2[0] && a3[1]==a2[1]));
-    
-    do{
-        a4[0]=rand()%6;
-        a4[1]=rand()%6;
-    }while((a4[0]==a1[0] && a4[1]==a1[1]) || (a4[0]==a2[0] && a4[1]==a2[1]) || (a4[0]==a3[0] && a4[1]==a3[1]));
-    
-    do{
-        a5[0]=rand()%6;
-        a5[1]=rand()%6;
-    }while((a5[0]==a1[0] && a5[1]==a1[1]) || (a5[0]==a2[0] && a5[1]==a2[1]) || (a5[0]==a3[0] && a5[1]==a3[1]) || (a5[0]==a4[0] && a5[1]==a4[1]));
-    
-    do{
-        a6[0]=rand()%6;
-        a6[1]=rand()%6;
-    }while((a6[0]==a1[0] && a6[1]==a1[1]) || (a6[0]==a2[0] && a6[1]==a2[1]) || (a6[0]==a3[0] && a6[1]==a3[1]) || (a6[0]==a4[0] && a6[1]==a4[1]) || (a6[0]==a5[0] && a6[1]==a5[1]));
-    
-    mesa[a1[0]][a1[1]] = 9;
-    mesa[a2[0]][a2[1]] = 9;
-    mesa[a3[0]][a3[1]] = 9;
-    mesa[a4[0]][a4[1]] = 9;
-    mesa[a5[0]][a5[1]] = 9;
-    mesa[a6[0]][a6[1]] = 9;
-    
-    printf("Introduce las coordenadas Y-X (entre 0 y 5)\n");
-    do
-    {
-        printf("\n");
-        scanf(" %i %i", &py, &px);
-        printf("\n");
-        
-        if(( ((py==a1[0]) && (px==a1[1])) || ((py==a2[0]) && (px==a2[1])) || ((py==a3[0]) && (px==a3[1])) || ((py==a4[0]) && (px==a5[1])) || ((py==a5[0]) && (px==a4[1])) || ((py==a6[0]) && (px==a6[1])) ))
-        {
-            for(i=0; i<6; i++)
-            {
-                for(j=0; j<6; j++)
-                {
-                    printf("%i ", mesa[i][j]);
-                    if(j==5)
-                        printf("\n");
-                }
-            }
-            printf("Has encontrado una MINA! Mira donde estaba el resto de ellas.\n");
-            resultado='m';
-        }
-        else
-        {
-            mesaInicial[py][px] = 1;
-            for(i=0; i<6; i++)
-            {
-                for(j=0; j<6; j++)
-                {
-                    printf("%i ", mesaInicial[i][j]);
-                    if(j==5)
-                        printf("\n");
-                }
-            }
-            numIntentos++;
-            if (numIntentos==60)
-            {
-                printf("ENHORABUENA, no has tocado ninguna mina...\n HAS GANADO LA PARTIDA\n");
-            }
-            else
-            {
-                printf("\nBien!, no has tocado ninguna mina, sigue jugando\n");
-                printf("Introduce NUEVAS coordenadas Y-X (entre 0 y 5)\n");
-            }
-        }
-    }while(resultado!='m');
-}
-
-void modoExperto()
-{
-    int i, j;
-    int a1[2], a2[2], a3[2], a4[2], a5[2], a6[2], a7[2], a8[2], a9[2];
-    int mesa[9][9];
-    int mesaInicial[9][9];
-    int py, px;
-    int resultado = 0;
-    char m;
-    int numIntentos=0;
-    
-    printf("Has elegido modo Experto, por lo que tu mesa es 9x9:\n");
-    
-    for(i=0; i<9; i++)
-    {
-        for(j=0; j<9; j++)
-        {
-            mesa[i][j]=0;
-            printf("/ ");
-                if(j==8)
-                    printf("\n");
-        }
-    }
-    printf("Recuerda de tienes 9 minas que evitar, BUENA SUERTE!!\n");
-    sleep(2);
-
-    for(i=0; i<9; i++)
-    {
-        for(j=0; j<9; j++)
-        {
-            mesaInicial[i][j]=0;
-        }
-    }
-    
-    srand( (unsigned int) time(NULL) );
-    a1[0]=rand()%9;
-    a1[1]=rand()%9;
-    
-    do{
-        a2[0]=rand()%9;
-        a2[1]=rand()%9;
-    }while(a2[0]==a1[0] && a2[1]==a1[1]);
-    
-    do{
-        a3[0]=rand()%9;
-        a3[1]=rand()%9;
-    }while((a3[0]==a1[0] && a3[1]==a1[1]) || (a3[0]==a2[0] && a3[1]==a2[1]));
-    
-    do{
-        a4[0]=rand()%9;
-        a4[1]=rand()%9;
-    }while((a4[0]==a1[0] && a4[1]==a1[1]) || (a4[0]==a2[0] && a4[1]==a2[1]) || (a4[0]==a3[0] && a4[1]==a3[1]));
-    
-    do{
-        a5[0]=rand()%9;
-        a5[1]=rand()%9;
-    }while((a5[0]==a1[0] && a5[1]==a1[1]) || (a5[0]==a2[0] && a5[1]==a2[1]) || (a5[0]==a3[0] && a5[1]==a3[1]) || (a5[0]==a4[0] && a5[1]==a4[1]));
-    
-    do{
-        a6[0]=rand()%9;
-        a6[1]=rand()%9;
-    }while((a6[0]==a1[0] && a6[1]==a1[1]) || (a6[0]==a2[0] && a6[1]==a2[1]) || (a6[0]==a3[0] && a6[1]==a3[1]) || (a6[0]==a4[0] && a6[1]==a4[1]) || (a6[0]==a5[0] && a6[1]==a5[1]));
-    
-    do{
-        a7[0]=rand()%9;
-        a7[1]=rand()%9;
-    }while((a7[0]==a1[0] && a7[1]==a1[1]) || (a7[0]==a2[0] && a7[1]==a2[1]) || (a7[0]==a3[0] && a7[1]==a3[1]) || (a7[0]==a4[0] && a7[1]==a4[1]) ||
-    (a7[0]==a5[0] && a7[1]==a5[1]) || (a7[0]==a6[0] && a7[1]==a6[1]) );
-    
-    do{
-        a8[0]=rand()%9;
-        a8[1]=rand()%9;
-    }while((a8[0]==a1[0] && a8[1]==a1[1]) || (a8[0]==a2[0] && a8[1]==a2[1]) || (a8[0]==a3[0] && a8[1]==a3[1]) || (a8[0]==a4[0] && a8[1]==a4[1]) ||
-    (a8[0]==a5[0] && a8[1]==a5[1]) || (a8[0]==a6[0] && a8[1]==a6[1]) || (a8[0]==a7[0] && a8[1]==a7[1]));
-    
-    do{
-        a9[0]=rand()%9;
-        a9[1]=rand()%9;
-    }while((a9[0]==a1[0] && a9[1]==a1[1]) || (a9[0]==a2[0] && a9[1]==a2[1]) || (a9[0]==a3[0] && a9[1]==a3[1]) || (a9[0]==a4[0] && a9[1]==a4[1]) ||
-    (a9[0]==a5[0] && a9[1]==a5[1]) || (a9[0]==a6[0] && a9[1]==a6[1]) || (a9[0]==a7[0] && a9[1]==a7[1]) || (a9[0]==a7[0] && a9[1]==a7[1]));
-    
-    mesa[a1[0]][a1[1]] = 9;
-    mesa[a2[0]][a2[1]] = 9;
-    mesa[a3[0]][a3[1]] = 9;
-    mesa[a4[0]][a4[1]] = 9;
-    mesa[a5[0]][a5[1]] = 9;
-    mesa[a6[0]][a6[1]] = 9;
-    mesa[a7[0]][a7[1]] = 9;
-    mesa[a8[0]][a8[1]] = 9;
-    mesa[a9[0]][a9[1]] = 9;
-    
-    printf("Introduce las coordenadas Y-X (entre 0 y 8)\n");
-    do
-    {
-        printf("\n");
-        scanf(" %i %i", &py, &px);
-        printf("\n");
-       
-        if(( ((py==a1[0]) && (px==a1[1])) || ((py==a2[0]) && (px==a2[1])) || ((py==a3[0]) && (px==a3[1])) || ((py==a4[0]) && (px==a4[1])) || ((py==a5[0]) && (px==a5[1])) ||
-            ((py==a6[0]) && (px==a6[1])) || ((py==a7[0]) && (px==a7[1])) || ((py==a8[0]) && (px==a8[1])) || ((py==a9[0]) && (px==a9[1])) ))
-        {
-            for(i=0; i<9; i++)
-            {
-                for(j=0; j<9; j++)
-                {
-                    printf("%i ", mesa[i][j]);
-                    if(j==8)
-                        printf("\n");
-                }
-            }
-            printf("Has encontrado una MINA! Mira donde estaba el resto de ellas.\n");
-            resultado='m';
-        }
-        else
-        {
-            mesaInicial[py][px] = 1;
-            for(i=0; i<9; i++)
-            {
-                for(j=0; j<9; j++)
-                {
-                    printf("%i ", mesaInicial[i][j]);
-                    if(j==8)
-                        printf("\n");
-                }
-            }
-            numIntentos++;
-            if (numIntentos==72)
-            {
-                printf("ENHORABUENA, no has tocado ninguna mina ... \n HAS GANADO LA PARTIDA\n");
-            }
-            else
-            {
-                printf("\nBien!, no has tocado ninguna mina, sigues jugando\n");
-                printf("Introduce NUEVAS coordenadas Y-X (entre 0 y 8)\n");
-            }
-        }
-    }while(resultado!='m');
-}
-
-void loop (char c[3][3]) {
-
-   int i, j, a, jugador;
-  
-   
-   do {
-       PrimeraVez (c);
-       
-       printf("Estas jugando al TRES EN RAYA! \n\n");
-       
-       do{
-       printf ("Escoge una opcion (introduce el numero 1 o 2):\
-               \n 1) Jugar contra la maquina.\
-               \n 2) Jugar con personas a la vez.\
-               \n 3) Salir del juego.\n");
-       scanf ("%i", &a);
-       
-       } while (a!=1 && a!=2 && a!=3);
-       
-       switch (a)
-       {
-           case 1:
-               i=0;
-               do{
-           system ("cls");
-           mesa(c);
-           
-           if(i% 2==0){
-               jugador=1;
-               Yo (c, jugador);
-        }
-        else {
-            Inteligencia_Artificial(c);
-        }
-        j=winner(c);
-        
-        i++;
-               
-               } while (i<=8 && j==2);
-   
-    system ("cls");
-    mesa(c);
-   
-   if (j==0){
-           printf("Eres el ganador! \n\n");
-   }
-   else
-   if(j==1){
-           printf("Oh No! Has Perdido!!\n\n");
-   }
-   else if (j==2){
-           printf("Habeis empatado! Intentalo de Nuevo!!");
-   }
-       break;
-       
-   case 2:
-               i=0;
-               do{
-                   mesa (c);
-           
-                   if (i % 2 == 0) {
-                   jugador=1;
-                       Yo (c,jugador);
-                   }
-           
-                   else {
-                   jugador=2;
-                       Yo (c,jugador);
-                   }
-           
-                      j = winner (c);
-                   i++;
-           
-                  } while (i<=8 && j==2);
-       
-               mesa (c);
-       
-               if (j==0)
-               {
-                   printf ("Enhorabuena! Ha ganado el jugador 1.\n\n");
-               }
-                else if (j==1)
-                {
-                   printf ("Enhorabuena! Ha ganado el jugador 2.\n\n");
-               }
-               else
-               {
-                   printf ("Habeis empatado.\n\n");
-               }
-           break;
-       }
-       } while (a!=3);
-   }
-
-
-void PrimeraVez (char c[3][3]){
-
-    int i, j;
-    char aux;
-
-    aux = '1';
-
-    for (i = 0; i<3; i++){
-
-        for(j = 0; j<3; j++){
-
-            c[i][j] = aux++;
-
-        }
-    }
-
-}
-
-void Yo (char c[3][3], int jugador){
-    int i;
-    char signo, cas;
-    
-    if (jugador==1)
-    signo = 'X';
-    
-    else
-        signo = 'O';
-        
-    do{
-        printf ("Turno del jugador %i: ",jugador);
-            fflush(stdin);
-        scanf ("%c", &cas);
-    }while (cas<'1' || cas>'9');
-        
-    cas_ocupada(c,cas,signo);
-}
-
-void cas_ocupada (char c[3][3], char aux, char signo){
-    
-    int i, j, k;
-    
-    do{
-        k=0;
-        
-        switch (aux){
-            case '1':{
-                i=0;
-                j=0;
-                if(c[i][j]== 'X' || c[i][j]=='O'){
-                    k=1;
-                    printf("La casilla ya esta ocupada, prueba en una diferente. \n\n");
-                    fflush(stdin);
-                    scanf ("%c", &aux);
-                }
-                break;
-            }
-            case '2':
-                i=0;
-                j=1;
-                if(c[i][j]== 'X' || c[i][j]=='O'){
-                    k=1;
-                    printf("La casilla ya esta ocupada, prueba en una diferente. \n\n");
-                    fflush(stdin);
-                    scanf ("%c", &aux);
-                }
-                break;
-            
-            case '3':
-                i=0;
-                j=2;
-                if(c[i][j]== 'X' || c[i][j]=='O'){
-                    k=1;
-                    printf("La casilla ya esta ocupada, prueba en una diferente. \n\n");
-                    fflush(stdin);
-                    scanf ("%c", &aux);
-                }
-                break;
-            
-            case '4':
-                i=1;
-                j=0;
-                if(c[i][j]== 'X' || c[i][j]=='O'){
-                    k=1;
-                    printf("La casilla ya esta ocupada, prueba en una diferente. \n\n");
-                    fflush(stdin);
-                    scanf ("%c", &aux);
-                }
-                break;
-            
-            case '5':
-                i=1;
-                j=1;
-                if(c[i][j]== 'X' || c[i][j]=='O'){
-                    k=1;
-                    printf("La casilla ya esta ocupada, prueba en una diferente. \n\n");
-                    fflush(stdin);
-                    scanf ("%c", &aux);
-                }
-                break;
-            
-            case '6':
-                i=1;
-                j=2;
-                if(c[i][j]== 'X' || c[i][j]=='O'){
-                    k=1;
-                    printf("La casilla ya esta ocupada, prueba en una diferente. \n\n");
-                    fflush(stdin);
-                    scanf ("%c", &aux);
-                }
-                break;
-            
-            case '7':
-                i=2;
-                j=0;
-                if(c[i][j]== 'X' || c[i][j]=='O'){
-                    k=1;
-                    printf("La casilla ya esta ocupada, prueba en una diferente. \n\n");
-                    fflush(stdin);
-                    scanf ("%c", &aux);
-                }
-                break;
-            
-            case '8':
-                i=2;
-                j=1;
-                if(c[i][j]== 'X' || c[i][j]=='O'){
-                    k=1;
-                    printf("La casilla ya esta ocupada, prueba en una diferente. \n\n");
-                    fflush(stdin);
-                    scanf ("%c", &aux);
-                }
-                break;
-            
-            case '9':
-                i=2;
-                j=2;
-                if(c[i][j]== 'X' || c[i][j]=='O'){
-                    k=1;
-                    printf("La casilla ya esta ocupada, prueba en una diferente. \n\n");
-                    fflush(stdin);
-                    scanf ("%c", &aux);
-                }
-                break;
-        }
-        
-    } while (k==1);
-    
-    c[i][j]= signo;
-}
-
-void Inteligencia_Artificial (char c[3][3]){
-    
-    int i, j, k;
-    
-    srand (time(NULL));
-    do{
-        i=rand() % 3;
-        j=rand() % 3;
-        
-        k=0;
-        
-        if(c[i][j]=='X' || c[i][j]=='O'){
-            k=1;
-        }
-    } while (k==1);
-    
-    c[i][j]= 'O';
-}
-
-void mesa (char c[3][3]){
-
-    int i, j;
-
-    for(i=0; i<3; i++){
-
-        for(j=0; j<3; j++){
-
-            if(j<2){
-                printf(" %c |", c[i][j]);
-            }
-
-            else{
-
-                printf(" %c ", c[i][j]);
-            }
-        }
-        if (i<2){
-             printf("\n-----------\n");
-        }
-    }
-    printf("\n\n");
-}
-
-int winner (char c[3][3]){
-    
-    if(c[0][0]=='X' || c[0][0]=='O'){
-        if(c[0][0]==c[0][1] && c[0][0]==c[0][2]){
-            if (c[0][0]=='X'){
-                return 0; // Gana jugador 1
-            }
-            else {
-                return 1; //Gana jugador 2
-            }
-        }
-        if(c[0][0]==c[1][0] && c[0][0]==c[2][0]){
-            if (c[0][0]=='X'){
-                return 0; //Gana jugador 1
-            }
-            else {
-                return 1; //Gana jugador 2
-            }
-        }
-    }
-    
-    if (c[1][1]=='X' ||c[1][1]=='O'){
-        if (c[1][1]==c[0][0] && c[1][1]==c[2][2]){
-            if (c[1][1]=='X'){
-                return 0; //Gana jugador 1
-            }
-            else {
-                return 1; //Gana jugador 2
-            }
-        }
-        if(c[1][1]==c[1][0] && c[1][1]==c[1][2]){
-            if(c[1][1]=='X'){
-                return 0; //Gana jugador 1
-            }
-            else {
-                return 1; //Gana jugador 2
-            }
-        }
-        if(c[1][1]==c[2][0] && c[1][1]==c[0][2]){
-            if(c[1][1]=='X'){
-                return 0; //Gana jugador 1
-            }
-            else {
-                return 1; //Gana jugador 2
-            }
-        }
-        if(c[1][1]==c[0][1] && c[1][1]==c[2][1]){
-            if(c[1][1]=='X'){
-                return 0; //Gana jugador 1
-            }
-            else {
-                return 1; //Gana jugador 2
-            }
-        }
-    }
-    if (c[2][2]=='X' ||c[2][2]=='O'){
-        if (c[2][2]==c[2][0] && c[2][2]==c[2][1]){
-            if (c[2][2]=='X'){
-                return 0; //Gana jugador 1
-            }
-            else {
-                return 1; //Gana jugador 2
-            }
-        }
-        if(c[2][2]==c[0][2] && c[2][2]==c[1][2]){
-            if(c[2][2]=='X'){
-                return 0; //Gana jugador 1
-            }
-            else {
-                return 1; //Gana jugador 2
-            }
-        }
-    }
-    return 2; //Hemos empatado
-}
 
