@@ -5,8 +5,6 @@
 #define V 26 //V marca las dimensiones de la vertical
 #define H 60 //H marca las dimensiones de la horizontal
 #define N 100
-#define E 40
-#define D 20
 
 typedef struct
 {
@@ -20,14 +18,7 @@ typedef struct
 	int x,y;
 }comida;
 
-typedef struct{
-	char palabra[E];
-}pal;
 
-typedef struct{
-	char nombre[E];
-	int punt;
-}usuario;
 
 void inicioP(char pantalla[V][H], int X, int Y, int inicioj, int finj, int inicioia, int finia);//
 void borde(char pantalla[V][H]);//dibuja los bordes de la pantalla rellenando la matriz
