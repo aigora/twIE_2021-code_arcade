@@ -47,6 +47,7 @@ int main()
 	{
 	printf("Selecciona juego: \n 1.Pong\n 2.Ahorcado\n 3.Tres en ralla\n 4.Piedra, papel o tijera\n 5.Snake\n 6.Salir\n");
 	scanf("%i",&opcion);
+	
 		switch(opcion)
 		{
 			case 1:
