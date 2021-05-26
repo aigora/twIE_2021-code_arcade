@@ -58,6 +58,7 @@ int main()
 	{	
 	printf("Bienvenido al juego del pong. Para comenzar pulse 1, 2 para ver las instrucciones o 3 para volver al inicio");
 	scanf("%i",&op);
+	
 	switch(op)
 	{
 		case 1:
@@ -116,7 +117,7 @@ int main()
 					 	int op;
 					 	do
 					 	{
-					 		printf("Bienvenido a piedra, papel o tijera. Para jugar pulse 1,\n para ver las instrucciones pulse 2 o pulsa 3 para volver al inicio\n");
+					 		printf("\nBienvenido a piedra, papel o tijera. Para jugar pulse 1,\n para ver las instrucciones pulse 2 o pulsa 3 para volver al inicio\n\n");
 					 	scanf("%i",&op);
 					 	switch(op)
 					 	{
@@ -130,7 +131,7 @@ int main()
 	
 								    printf("Estas jugando al PIEDRA, PAPEL O TIJERA!!\n");
 								    printf("Vamos a jugar al mejor de 5\n");
-								    printf("¿Estas preparado?\n");
+								    printf("¿Estas preparado?\n\n");
 								    
 								    for(i=1; i<6; i++){
 								    do{
@@ -215,19 +216,19 @@ int main()
 								        PM=PM;
 								    }
 								    
-								    printf("-------------------------------\n");
-								    printf("Ha terminado el juego!!\n ");
+								    printf("-------------------------------\n\n");
+								    printf("Ha terminado el juego!!\n\n ");
 								    
 								    if((PJ>PM)){
-								        printf("Has GANADO la partida, este ha sido el resultado final:\n");
+								        printf("Has GANADO la partida, este ha sido el resultado final:\n\n");
 								        printf("Jugador - Maquina : %i - %i\n", PJ, PM);
 								    }
 								    if((PJ<PM)){
-								        printf("Has PERDIDO la partida, este ha sido el resultado final:\n");
+								        printf("Has PERDIDO la partida, este ha sido el resultado final:\n\n");
 								        printf("Jugador - Maquina : %i - %i\n", PJ, PM);
 								    }
 								    if(PJ==PM){
-								        printf("Habeis EMPATADO la partida, este ha sido el resultado final:\n");
+								        printf("Habeis EMPATADO la partida, este ha sido el resultado final:\n\n");
 								        printf("Jugador - Maquina : %i - %i\n", PJ, PM);
 								    }
 					    
@@ -573,5 +574,4 @@ void datos2(char pantalla[V][H], int longitud, snake a[N], comida b)
 	}
 	pantalla[b.y][b.x]='S';
 }
-
 
