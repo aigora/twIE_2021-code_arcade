@@ -253,14 +253,33 @@ int main()
 
 			case 5:
 				{
-					snake a[N];
-					comida b;
-					int longitud;
-					char pantalla[V][H];
-					inicioS(&longitud,pantalla,a,b);
-					leer(pantalla);
-					gameloopS(pantalla,longitud,a,b);
-					system("pause");
+					int op;
+					do
+					{
+						printf("Bienvenido al juego del snake. Pulsa 1 para comenzar la partida, 2 para ver las instrucciones o 3 para volver al menu principal:\n");
+						scanf("%i",&op);
+						switch(op)
+							{
+								case 1:
+									{
+										snake a[N];
+										comida b;
+										int longitud;
+										char pantalla[V][H];
+										inicioS(&longitud,pantalla,a,b);
+										leer(pantalla);
+										gameloopS(pantalla,longitud,a,b);
+										system("pause");
+										break;
+									}
+								case 2:
+									{
+										printf("Instrucciones:\n El juego consiste en ir comiendose la comida para hacerse mas grande sin chocarse con los bordes.\nControles:\nPulsa w para desplazarte hacia arriba.\nPulsa X para desplazarte hacia abajo.\nPulsa A para moverte hacia la izquierda.\nPulsa D para moverte a la derecha.\n");
+									}
+							}
+
+					}while (op!=3);
+				
 				}
 
 //inicia el juego del snake
