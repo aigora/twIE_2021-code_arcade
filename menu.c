@@ -529,8 +529,8 @@ void inputS(char pantalla[V][H], int *longitud, int *fin, snake a[N],comida b)
 	{
 		*longitud +=1;
 		a[*longitud-1].imagen='Z';
-		b.x=rand()%(H-1);
-		b.y=rand()%(V-1);
+		b.x=rand()%20;
+		b.y=rand()%20;
 		//controla que la comida no aparezca en los bordes
 		while(b.x==0)
 		{
@@ -547,22 +547,22 @@ void inputS(char pantalla[V][H], int *longitud, int *fin, snake a[N],comida b)
 		if(kbhit()==1)
 		{
 			tecla = getch();
-			if(tecla=='x'&&a[0].moverY!=-1)
+			if(tecla=='x' && a[0].moverY!=-1)
 			{
 				a[0].moverX=0;
 				a[0].moverY=1;
 			}
-			if(tecla=='w'&&a[0].moverY!=1)
+			if(tecla=='w' && a[0].moverY!=1)
 			{
 				a[0].moverX=0;
 				a[0].moverY=-1;
 			}
-			if(tecla=='a'&&a[0].moverX!=1)
+			if(tecla=='a' && a[0].moverX!=1)
 			{
 				a[0].moverY=-1;
 				a[0].moverY=0;
 			}
-			if(tecla=='d'&&a[0].moverX!=-1)
+			if(tecla=='d' && a[0].moverX!=-1)
 			{
 				a[0].moverY=1;
 				a[0].moverY=0;
