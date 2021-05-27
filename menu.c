@@ -458,8 +458,8 @@ void inicioS(int *longitud, char pantalla[V][H],snake a[N],comida b)
 	a[0].y = 13;
 	*longitud=4;//longitud inicial serpiente
 	srand(time(NULL));//coordenadas comida
-	b.x=rand()%(H-1);
-	b.y=rand()%(V-1);
+	b.x=rand()%20;
+	b.y=rand()%20;
 	//controla que la comida no aparezca en los bordes
 	while(b.x==0)
 	{
@@ -503,8 +503,8 @@ void gameloopS(char pantalla[V][H], int longitud,snake a[N],comida b)
 	fin=0;
 	do
 	{
-		
-		dibujar(pantalla);
+		system("cls");
+		leer(pantalla);
 		inputS(pantalla,&longitud,&fin,a,b);
 		actualizarS(pantalla,longitud,a,b);
 	}while(fin==0);
