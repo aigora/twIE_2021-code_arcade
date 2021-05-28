@@ -1044,13 +1044,13 @@ void IA_coordenadas(char jugador, char tablero[3][3], int *yFin, int *xFin)
     }
  if (empty(0, 0, tablero))
      {
-         imprimir_texto("Tomar columna superior izquierda", jugador);
+         imprimir_texto("Me pongo arriba a la izquierda", jugador);
          *yFin = 0;
          *xFin = 0;
          return;
      }
      // 5
-     imprimir_texto("Coordenadas aleatorias", jugador);
+     imprimir_texto("Coordenadas al azar", jugador);
      random_coordenadas(jugador, tablero, yFin, xFin);
 } 
 
