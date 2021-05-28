@@ -78,110 +78,115 @@ void copiar(char temp[], int i, instr p[]);
 
 int main()
 {
-	int opcion;
+	char opcion;
 
 	do
 	{
-	printf("Selecciona juego: \n 1.Pong\n 2.Ahorcado\n 3.Tres en ralla\n 4.Piedra, papel o tijera\n 5.Snake\n 6.Salir\n");
-	scanf("%i",&opcion);
+	printf("Selecciona juego: \n a.Pong\n b.Ahorcado\n c.Tres en ralla\n d.Piedra, papel o tijera\n e.Snake\n f.Salir\n");
+	scanf("%c",&opcion);
 	
 		switch(opcion)
 		{
-			case 1://inicia el juego del pong 
-				{
+		case 'a':
+		case 'A'://inicia el juego del pong 
+			{
 
-	int op;
-	do
-	{	
-	printf("Bienvenido al juego del pong. Para comenzar pulse 1, 2 para ver las instrucciones o 3 para volver al inicio\n");
-	scanf("%i",&op);
-	
-	switch(op)
-	{
-		case 1:
+			char op;
+			do
+			{	
+			fflush(stdin);
+			printf("Bienvenido al juego del pong. Para jugar pulse 'j', 'i' para ver las instrucciones o 'v' para volver al inicio\n");
+			scanf("%c",&op);
+			fflush(stdin);
+			switch(op)
 			{
-	int X, Y, inicioj, finj, inicioia, finia; //variables de posicion
-	int moverX,moverY, moveria;//variables de movimiento
-	//X e Y son las variables de posicion de la pelota 
-	//incioj e finj indica el inicio y fin de las raquetas del jugador
-	//inicioia e finia indica el inicio y fin de la raqueta de la ia (inteligencia artificial) 
-	char pantalla[V][H]; //pantalla es espacio en el que se va a jugar
-	X=30; //es la mitad de H
-	Y=13; //es la mitad de V
-	//la pelota comienza en el centro de la pantalla (se puede empezar en cualquier otro sitio)
-	inicioj=10;
-	finj= 16;
-	//la raqueta del jugador comienza en la mitad
-	inicioia= 5;
-	finia=24;
-	//la raqueta de la ia empieza a la mitad
-	moverX=-1;
-	moverY=-1;
-	moveria=-1;
-	inicioP(pantalla,X,Y,inicioj,finj,inicioia,finia);
-	gameloopP(pantalla,X,Y,inicioj,finj,inicioia,finia,moverX,moverY,moveria);
-	//system ("pause");
-	}
-	break;
+				case 'j':
+					{
+					int X, Y, inicioj, finj, inicioia, finia; //variables de posicion
+					int moverX,moverY, moveria;//variables de movimiento
+					//X e Y son las variables de posicion de la pelota 
+					//incioj e finj indica el inicio y fin de las raquetas del jugador
+					//inicioia e finia indica el inicio y fin de la raqueta de la ia (inteligencia artificial) 
+					char pantalla[V][H]; //pantalla es espacio en el que se va a jugar
+					X=30; //es la mitad de H
+					Y=13; //es la mitad de V
+					//la pelota comienza en el centro de la pantalla (se puede empezar en cualquier otro sitio)
+					inicioj=10;
+					finj= 16;
+					//la raqueta del jugador comienza en la mitad
+					inicioia= 5;
+					finia=24;
+					//la raqueta de la ia empieza a la mitad
+					moverX=-1;
+					moverY=-1;
+					moveria=-1;
+					inicioP(pantalla,X,Y,inicioj,finj,inicioia,finia);
+					gameloopP(pantalla,X,Y,inicioj,finj,inicioia,finia,moverX,moverY,moveria);
+					//system ("pause");
+					}
+				break;
 	
-	case 2:
-		{
-				instr *p;
-	int cont=0;
-	char temp[100];
-	char aux;
-	int i,j;
-	FILE *pf;
-	pf=fopen("Instrucciones pong.txt","r");
-	if(pf==NULL)
-	{
-		printf("No se ha padido abrir el fichero\n");
-		exit(-1);
-	}
-	while(!feof(pf))
-	{
-		fgets(temp,100,pf);
-		cont++;
-	}
-	rewind(pf);
-	p=(instr*)malloc(cont*sizeof(instr));
+				case 'i':
+				case 'I':
+					{
+					instr *p;
+					int cont=0;
+					char temp[100];
+					char aux;
+					int i,j;
+					FILE *pf;
+					pf=fopen("Instrucciones pong.txt","r");
+					if(pf==NULL)
+					{
+					printf("No se ha padido abrir el fichero\n");
+					exit(-1);
+					}
+					while(!feof(pf))
+					{
+					fgets(temp,100,pf);
+					cont++;
+					}
+					rewind(pf);
+					p=(instr*)malloc(cont*sizeof(instr));
 	
-	if(p==NULL)
-	{
-		printf("No se ha podido reservar memoria\n");
-		exit(-1);
-	}
-	for(i=0;!feof(pf);i++)
-	{
-		vaciar(temp);
-		aux='O';
-		for(j=0;aux!='\n';j++)
-		{
-			aux=fgetc(pf);
-			if(aux!='\n')
-			{
-				temp[j]=aux;
+					if(p==NULL)
+					{
+					printf("No se ha podido reservar memoria\n");
+					exit(-1);
+					}
+					for(i=0;!feof(pf);i++)
+					{
+						vaciar(temp);
+						aux='O';
+					for(j=0;aux!='\n';j++)
+					{
+						aux=fgetc(pf);
+						if(aux!='\n')
+						{
+							temp[j]=aux;
+						}
+					}
+					copiar(temp,i,p);
+					fclose(pf);
+					printf("Instrucciones: %s \n",p[i].a);
+					}
+					}
+				
 			}
-		}
-		copiar(temp,i,p);
-		fclose(pf);
-		printf("Instrucciones: %s \n",p[i].a);
-	}
-}
-			
-		}
-			}while(op!=3);
+			}while(op!='v' && op!='V');
 }
 		system("cls");
 	
 				break;
 				
-		case 2: //inicia el juego del ahorcado
+		case 'b':
+		case 'B': //inicia el juego del ahorcado
 				{
 				int op;
 				do
 				{
-					printf("Bienvenido al juego del ahorcado. Para comezar pulsa 1, pulsa 2 para ver las instrucciones o 3 para volver al menu principal.\n");
+					fflush(stdin);
+					printf("Bienvenido al juego del ahorcado. Para jugar pulsa 'j', pulsa 'i' para ver las instrucciones o 'v' para volver al menu principal.\n");
 					scanf("%i",&op);
 					switch(op)
 					{
@@ -421,100 +426,111 @@ int main()
 
 
 				break;
-		case 3: //inicia el juego del tres en ralla
+		case 'c':
+		case 'C': //inicia el juego del tres en ralla
 		{
-		int op;
-		do
-		{	
-		printf("Bienvenido al juego del Tres en Raya. Para comenzar pulse 1, 2 para ver las instrucciones o 3 para volver al inicio\n");
-		scanf("%i",&op);
+			char op;
+			do
+			{	
+			fflush(stdin);
+			
+			printf("Bienvenido al juego del Tres en Raya. Para jugar pulse 'j', 'i' para ver las instrucciones o 'v' para volver al inicio\n");
+			scanf("%c",&op);
 	
-		switch(op)
-		{
-			case 1:
+			switch(op)
+			{
+			case 'j':
+			case 'J':
 			{
 			
 
- int mode;
-    printf("Bienvenido, estas jugando al TRES EN RAYA!!\n");
- do{
-    printf("1. Jugador1 - Jugador2\n2. Jugador - Maquina\n3. Maquina - Maquina\n4. Salir\n");
-    printf("Elige una de las opciones disponibles: ");
-    scanf("%d", &mode);
-    }while (mode !=1 && mode !=2 && mode !=3 && mode !=4);
+ 			char mode;
+   			 printf("Bienvenido, estas jugando al TRES EN RAYA!!\n");
+ 			do{
+ 			  fflush(stdin);
+  			  printf("a. Jugador1 - Jugador2\nb. Jugador - Maquina\nc. Maquina - Maquina\nd. Salir\n");
+   			  printf("Elige una de las opciones disponibles: ");
+    			scanf("%c", &mode);
+   			 }while (mode !='d' && mode != 'D');
  
-    if (mode == 4)
-    {
-        return 0;
-    }
- Iniciar(mode);
-}
+    			if (mode == 'd' || mode == 'D')
+    			{
+     			   return 0;
+   			 }
+ 			Iniciar(mode);
+			}
 
 
 				
 			break;
-			case 2: 
+			
+			case 'i':
+			case 'I': 
 			{
 					instr *p;
-	int cont=0;
-	char temp[100];
-	char aux;
-	int i,j;
-	FILE *pf;
-	pf=fopen("Instrucciones tres en raya.txt","r");
-	if(pf==NULL)
-	{
-		printf("No se ha padido abrir el fichero\n");
-		exit(-1);
-	}
-	while(!feof(pf))
-	{
-		fgets(temp,100,pf);
-		cont++;
-	}
-	rewind(pf);
-	p=(instr*)malloc(cont*sizeof(instr));
-	if(p==NULL)
-	{
-		printf("No se ha podido reservar memoria\n");
-		exit(-1);
-	}
-	for(i=0;!feof(pf);i++)
-	{
-		vaciar(temp);
-		aux='O';
-		for(j=0;aux!='\n';j++)
-		{
-			aux=fgetc(pf);
-			if(aux!='\n')
-			{
-				temp[j]=aux;
+				int cont=0;
+				char temp[100];
+				char aux;
+				int i,j;
+				
+				FILE *pf;
+				pf=fopen("Instrucciones tres en raya.txt","r");
+				if(pf==NULL)
+				{
+					printf("No se ha padido abrir el fichero\n");
+					exit(-1);
+				}
+				while(!feof(pf))
+				{
+					fgets(temp,100,pf);
+					cont++;
+				}
+				rewind(pf);
+				p=(instr*)malloc(cont*sizeof(instr));
+				if(p==NULL)
+				{
+					printf("No se ha podido reservar memoria\n");
+					exit(-1);
+				}
+				for(i=0;!feof(pf);i++)
+				{
+					vaciar(temp);
+					aux='O';
+					for(j=0;aux!='\n';j++)
+					{
+						aux=fgetc(pf);
+						if(aux!='\n')
+						{
+							temp[j]=aux;
+						}
+					}
+					copiar(temp,i,p);
+					fclose(pf);
+					printf("Instrucciones: %s \n",p[i].a);
+				}
 			}
-		}
-		copiar(temp,i,p);
-		fclose(pf);
-		printf("Instrucciones: %s \n",p[i].a);
-	}
-}
 			}
 		
-		}while(op!=3);
+		}while(op!='v' && op!='V');
 		system("cls");
 				
 				}
 				break;
-			case 4: //Incia el piedra, papel o tijera
+			case 'd':
+			case 'D': //Incia el piedra, papel o tijera
 				{
 						
-					 	int op;
+					 	char op;
 					 	do
 					 	{
-					 		printf("\nBienvenido a piedra, papel o tijera. Para jugar pulse 1,\n para ver las instrucciones pulse 2 o pulsa 3 para volver al inicio\n\n");
-					 	scanf("%i",&op);
+					 		fflush(stdin);
+					 		printf("\nBienvenido a piedra, papel o tijera. Para jugar pulse 'j', para ver las instrucciones pulse 'i' o pulsa 'v' para volver al inicio\n\n");
+					 	scanf("%c",&op);
 					 	switch(op)
 					 	{
 					 		
-					 		case 1:
+					 		case 'j':
+					 		case 'J':
 					 			{
 					 				int i; //Contador
 								    int Jugador=0, Maquina; //Jugadas elegidas
@@ -628,68 +644,72 @@ int main()
 								 }
 					 			break;
 						 
-					case 2:
+					case 'i':
+					case 'I':
 						{
 							instr *p;
-	int cont=0;
-	char temp[100];
-	char aux;
-	int i,j;
-	FILE *pf;
-	pf=fopen("Instrucciones piedra papel o tijera.txt","r");
-	if(pf==NULL)
-	{
-		printf("No se ha padido abrir el fichero\n");
-		exit(-1);
-	}
-	while(!feof(pf))
-	{
-		fgets(temp,100,pf);
-		cont++;
-	}
-	rewind(pf);
-	p=(instr*)malloc(cont*sizeof(instr));
-	if(p==NULL)
-	{
-		printf("No se ha podido reservar memoria\n");
-		exit(-1);
-	}
-	for(i=0;!feof(pf);i++)
-	{
-		vaciar(temp);
-		aux='O';
-		for(j=0;aux!='\n';j++)
-		{
-			aux=fgetc(pf);
-			if(aux!='\n')
-			{
-				temp[j]=aux;
-			}
-		}
-		copiar(temp,i,p);
-		fclose(pf);
-		printf("Instrucciones: %s \n",p[i].a);
-	}
-}
+					int cont=0;
+					char temp[100];
+					char aux;
+					int i,j;
+					FILE *pf;
+						pf=fopen("Instrucciones piedra papel o tijera.txt","r");
+						if(pf==NULL)
+						{
+							printf("No se ha padido abrir el fichero\n");
+							exit(-1);
+						}
+						while(!feof(pf))
+						{
+						fgets(temp,100,pf);
+						cont++;
+						}
+						rewind(pf);
+						p=(instr*)malloc(cont*sizeof(instr));
+						if(p==NULL)
+						{
+							printf("No se ha podido reservar memoria\n");
+							exit(-1);
+						}
+						for(i=0;!feof(pf);i++)
+						{
+							vaciar(temp);
+							aux='O';
+							for(j=0;aux!='\n';j++)
+							{
+								aux=fgetc(pf);
+								if(aux!='\n')
+								{
+									temp[j]=aux;
+								}
+							}
+							copiar(temp,i,p);
+							fclose(pf);
+							printf("Instrucciones: %s \n",p[i].a);
+						}
+						}
 						break;
 					}
 						
-					}while(op!=3);
-				system("cls");
-			}
+					}while(op!='v' && op!='V');
+					system("cls");
+				}
 
 				break;
 
-			case 5: //inicia el juego del snake
+				case 'e':
+				case 'E': //inicia el juego del snake
 				{
-					int op;
+					char op;
 					do
 					{
-						printf("Bienvenido al juego del snake. Pulsa 1 para comenzar la partida, 2 para ver las instrucciones o 3 para volver al menu principal:\n");
-						scanf("%i",&op);
+						fflush(stdin);
+						printf("Bienvenido al juego del snake. Pulsa 'j' para jugar la partida, 'i' para ver las instrucciones o 'v' para volver al menu principal:\n");
+						scanf("%c",&op);
 						switch(op)
 							{
-								case 1:
+						case 'j':
+						case 'J':
 									{
 										snake a[N];
 										comida b;
@@ -701,65 +721,71 @@ int main()
 										system("pause");
 										break;
 									}
-								case 2:
+				 		case 'i':
+						case 'I':
 									{
 											instr *p;
-	int cont=0;
-	char temp[100];
-	char aux;
-	int i,j;
-	FILE *pf;
-	pf=fopen("Instrucciones snake.txt","r");
-	if(pf==NULL)
-	{
-		printf("No se ha padido abrir el fichero\n");
-		exit(-1);
-	}
-	while(!feof(pf))
-	{
-		fgets(temp,100,pf);
-		cont++;
-	}
-	rewind(pf);
-	p=(instr*)malloc(cont*sizeof(instr));
-	if(p==NULL)
-	{
-		printf("No se ha podido reservar memoria\n");
-		exit(-1);
-	}
-	for(i=0;!feof(pf);i++)
-	{
-		vaciar(temp);
-		aux='O';
-		for(j=0;aux!='\n';j++)
-		{
-			aux=fgetc(pf);
-			if(aux!='\n')
-			{
-				temp[j]=aux;
-			}
-		}
-		copiar(temp,i,p);
-		fclose(pf);
-		printf("Instrucciones: %s \n",p[i].a);
-	}
-}
-									}
+						int cont=0;
+						char temp[100];
+						char aux;
+						int i,j;
+						FILE *pf;
+						pf=fopen("Instrucciones snake.txt","r");
+						if(pf==NULL)
+						{
+							printf("No se ha padido abrir el fichero\n");
+							exit(-1);
+						}
+						while(!feof(pf))
+						{
+							fgets(temp,100,pf);
+							cont++;
+						}
+						rewind(pf);
+						p=(instr*)malloc(cont*sizeof(instr));
+						if(p==NULL)
+						{
+							printf("No se ha podido reservar memoria\n");
+							exit(-1);
+						}
+						for(i=0;!feof(pf);i++)
+						{
+							vaciar(temp);
+							aux='O';
+							for(j=0;aux!='\n';j++)
+							{
+								aux=fgetc(pf);
+								if(aux!='\n')
+								{
+									temp[j]=aux;
+								}
+							}
+							copiar(temp,i,p);
+							fclose(pf);
+							printf("Instrucciones: %s \n",p[i].a);
+						}
+					}		
+				}
 							
 
-					}while (op!=3);
-				system("cls");
+							}while (op!='v' && op!= 'V');
+					system("cls");
 				}
 
 				break;
+				
+		default: system("cls");
+		//printf ("No has seleccionado una opcion valida\n\n");
+		
 		}
-	}while(opcion!='6');
+	}while(opcion!='f' && opcion!='F'); //|| opcion =2 || opcion =3 || opcion =4 || opcion =5 || opcion =6);
 	system("cls");
 	if(opcion==6)
 	{
 		printf("Gracias por jugar. Nos vemos!\n");
 	}
 	
+	printf("Nos vemos pronto!");
 
 	return 0;
 }
