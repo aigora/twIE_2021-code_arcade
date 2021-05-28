@@ -120,9 +120,10 @@ int main()
 	moveria=-1;
 	inicioP(pantalla,X,Y,inicioj,finj,inicioia,finia);
 	gameloopP(pantalla,X,Y,inicioj,finj,inicioia,finia,moverX,moverY,moveria);
-	system ("pause");
+	//system ("pause");
 	}
 	break;
+	
 	case 2:
 		{
 				instr *p;
@@ -144,6 +145,7 @@ int main()
 	}
 	rewind(pf);
 	p=(instr*)malloc(cont*sizeof(instr));
+	
 	if(p==NULL)
 	{
 		printf("No se ha podido reservar memoria\n");
@@ -173,6 +175,7 @@ int main()
 		system("cls");
 	
 				break;
+				
 		case 2: //inicia el juego del ahorcado
 				{
 				int op;
@@ -323,7 +326,7 @@ int main()
 												preadivinada = 1; 
 												break;
 											} 
-											//continue;
+											
 										}
 									
 										if( letraintro == palabras[azar][bucle] ) {
@@ -431,7 +434,7 @@ int main()
 			
 
  int mode;
-    printf("Bienvenido, estás jugando al TRES EN RAYA!!\n");
+    printf("Bienvenido, estas jugando al TRES EN RAYA!!\n");
  do{
     printf("1. Jugador1 - Jugador2\n2. Jugador - Maquina\n3.Maquina - Maquina\n4. Salir\n");
     printf("Elige una de las opciones disponibles: ");
@@ -518,7 +521,7 @@ int main()
 	
 								    printf("PIEDRA, PAPEL O TIJERA!!\n");
 								    printf("Vamos a jugar al mejor de 5\n");
-								    printf("¿Estas preparado?\n\n");
+								    printf("�Estas preparado?\n\n");
 								    
 								    for(i=1; i<6; i++){
 								    do{
@@ -1073,7 +1076,7 @@ clean(tablero);
 
 char jugador_turno = Jug_X;
 
-printf("\nEmpezará el jugador: %c\n", jugador_turno);
+printf("\nEmpezara el jugador: %c\n", jugador_turno);
 int x, y;
 
 while (1)
