@@ -182,15 +182,16 @@ int main()
 		case 'b':
 		case 'B': //inicia el juego del ahorcado
 				{
-				int op;
+				char op;
 				do
 				{
 					fflush(stdin);
 					printf("Bienvenido al juego del ahorcado. Para jugar pulsa 'j', pulsa 'i' para ver las instrucciones o 'v' para volver al menu principal.\n");
-					scanf("%i",&op);
+					scanf("%c",&op);
 					switch(op)
 					{
-						case 1:
+						case 'j':
+						case 'J':
 							{
 								fflush(stdin);
 								srand(time(NULL));
@@ -370,12 +371,14 @@ int main()
 									printf("\nHAS GANADO!!! :)\nLa palabra era: %s\n",
 									palabras[azar]);
 								} 
-	
+								system ("pause");
 		
 
 							}
+							break;
 					
-						case 2:
+						case 'i':
+						case 'I':
 							{
 									instr *p;
 							int cont=0;
@@ -420,7 +423,7 @@ int main()
 						}
 							}
 							break;
-				}while(op!=3);
+				}while(op!='v' && op!='V');
 				system("cls");
 				}
 
@@ -780,12 +783,8 @@ int main()
 			}
 			}while(opcion!='f' && opcion!='F'); //|| opcion =2 || opcion =3 || opcion =4 || opcion =5 || opcion =6);
 			system("cls");
-			/*if(opcion==6)
-			{
-			printf("Gracias por jugar. Nos vemos!\n");
-	}*/
 	
-	printf("Nos vemos pronto!");
+	printf("Gracias por jugar. Nos vemos pronto!!");
 
 	return 0;
 }
