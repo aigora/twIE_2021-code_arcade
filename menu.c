@@ -747,6 +747,7 @@ int main()
 				break;
 		}
 	}while(opcion!='6');
+	printf("Gracias por jugar. Nos vemos!");
 	
 
 	return 0;
