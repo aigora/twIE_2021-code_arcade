@@ -1,0 +1,2 @@
+el juego consiste en marcar gol. Pulsa w para subir la raqueta y x para bajarla
+.

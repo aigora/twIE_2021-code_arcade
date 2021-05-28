@@ -2,19 +2,19 @@
 #include <stdlib.h>
 #include <string.h>
 typedef struct{
-	char a[10];
-}palabra;
+	char a[200];
+}instr;
 void vaciar(char temp[]);
-void copiar(char temp[], int i, palabra p[]);
+void copiar(char temp[], int i, instr p[]);
 int main()
 {
-	palabra *p;
+	instr *p;
 	int cont=0;
 	char temp[100];
 	char aux;
 	int i,j;
 	FILE *pf;
-	pf=fopen("Palabras.txt","r");
+	pf=fopen("Instrucciones.txt","r");
 	if(pf==NULL)
 	{
 		printf("No se ha padido abrir el fichero\n");
@@ -26,7 +26,7 @@ int main()
 		cont++;
 	}
 	rewind(pf);
-	p=(palabra*)malloc(cont*sizeof(palabra));
+	p=(instr*)malloc(cont*sizeof(instr));
 	if(p==NULL)
 	{
 		printf("No se ha podido reservar memoria\n");
@@ -45,7 +45,8 @@ int main()
 			}
 		}
 		copiar(temp,i,p);
-		printf("Palabra: %s \n",p[i].a);
+		fclose(pf);
+		printf("Instrucciones: %s \n",p[i].a);
 	}
 }
 void vaciar(char temp[])
@@ -56,7 +57,7 @@ void vaciar(char temp[])
 		temp[i]='\0';
 	}
 }
-void copiar(char temp[], int i, palabra p[])
+void copiar(char temp[], int i, instr p[])
 {
 
 	strcpy(p[i].a,temp);

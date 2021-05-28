@@ -28,6 +28,9 @@ typedef struct
 	int x,y;
 }comida;
 
+typedef struct{
+	char a[200];
+}instr;
 
 //Pong
 void inicioP(char pantalla[V][H], int X, int Y, int inicioj, int finj, int inicioia, int finia);//
@@ -68,6 +71,8 @@ void ganar_coordenadas (char jugador, char origMesa[3][3], int *yFin, int *xFin)
 int contar (char jugador, char copiaMesa[3][3]); //Permite saber la mayor puntuacion sin especificar coordenadas
 void puntos_coordenadas (char jugador, char tablero[3][3], int *yFin, int *xFin, int *conteo); //Especifica en que cordenadas sera mejor poner la pieza
 void IA_coordenadas (char jugador, char tablero[3][3], int *yFin, int *xFin); // La inteligencia artificial elige las coordenadas para ganar
+void vaciar(char temp[]);
+void copiar(char temp[], int i, instr p[]);
 
 
 
@@ -119,12 +124,54 @@ int main()
 	}
 	break;
 	case 2:
-		printf("Instrucciones\n El pong consiste en que no te marquen gol, para ello dispones de una raqueta\n que se mueve hacia arriba pulsando w y abajo pulsando x\n");
-		break;
-}
-}while(op!=3);
-		system("cls");
+		{
+				instr *p;
+	int cont=0;
+	char temp[100];
+	char aux;
+	int i,j;
+	FILE *pf;
+	pf=fopen("Instrucciones.txt","r");
+	if(pf==NULL)
+	{
+		printf("No se ha padido abrir el fichero\n");
+		exit(-1);
 	}
+	while(!feof(pf))
+	{
+		fgets(temp,100,pf);
+		cont++;
+	}
+	rewind(pf);
+	p=(instr*)malloc(cont*sizeof(instr));
+	if(p==NULL)
+	{
+		printf("No se ha podido reservar memoria\n");
+		exit(-1);
+	}
+	for(i=0;!feof(pf);i++)
+	{
+		vaciar(temp);
+		aux='O';
+		for(j=0;aux!='\n';j++)
+		{
+			aux=fgetc(pf);
+			if(aux!='\n')
+			{
+				temp[j]=aux;
+			}
+		}
+		copiar(temp,i,p);
+		fclose(pf);
+		printf("Instrucciones: %s \n",p[i].a);
+	}
+}
+			
+			
+			}while(op!=3);
+}
+		system("cls");
+	
 				break;
 		case 2: //inicia el juego del ahorcado
 				{
@@ -320,6 +367,7 @@ int main()
 					
 						case 2:
 							printf("Instrucciones:");
+							break;
 				}
 				}while(op!=3);
 
@@ -1245,4 +1293,18 @@ void IA_coordenadas(char jugador, char tablero[3][3], int *yFin, int *xFin)
      imprimir_texto("Coordenadas al azar", jugador);
      random_coordenadas(jugador, tablero, yFin, xFin);
 } 
+
+void vaciar(char temp[])
+{
+	int i;
+	for(i=0;i<100;i++)
+	{
+		temp[i]='\0';
+	}
+}
+void copiar(char temp[], int i, instr p[])
+{
+
+	strcpy(p[i].a,temp);
+}
 
