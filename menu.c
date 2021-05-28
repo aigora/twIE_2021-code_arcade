@@ -258,11 +258,52 @@ int main()
 									"fisioterapeuta",
 									"juvenil",
 									"retraso",
+									"parachoques",
+									"llegar",
+									"llave",
+									"alumno",
+									"gallo",
+									"mosca",
+									"ciervo",
+									"barco",
+									"asiento",
+									"aparato",
+									"oruga",
+									"destornillador",
+									"escarabajo",
+									"cocina",
+									"linterna",
+									"cuchilla",
+									"vestíbulo",
+									"arenque",
+									"timbre",
+									"cuco",
+									"cuchillo",
+									"chimenea",
+									"taza",
+									"puercoespin",
+									"documento",
+									"puma",
+									"espatula",
+									"sirena",
+									"pajaro",
+									"cocina",
+									"equipaje",
+									"volante",
+									"tijeras",
+									"automovil",
+									"araña",
+									"mariposa",
+									"desvan",
+									"leopardo",
+									"reloj",
+									"pulsera",
+									"llavero",
 										
 								};
 								
 								// para palabra aleatoria
-								int azar = rand() % 60;
+								int azar = rand() % 100;
 								
 								int vidas = 6;
 								int numAciertos = 0;
