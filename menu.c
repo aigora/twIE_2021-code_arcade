@@ -178,7 +178,7 @@ int main()
 				int op;
 				do
 				{
-					printf("Bienvenido al juego del ahorcado. Para comezar pulsa 1, pulsa 2 para ver las instrucciones o 3 para volver al menú principal.\n");
+					printf("Bienvenido al juego del ahorcado. Para comezar pulsa 1, pulsa 2 para ver las instrucciones o 3 para volver al menu principal.\n");
 					scanf("%i",&op);
 					switch(op)
 					{
@@ -411,6 +411,7 @@ int main()
 							}
 							break;
 				}while(op!=3);
+				system("cls");
 				}
 
 
@@ -493,6 +494,7 @@ int main()
 			}
 		
 		}while(op!=3);
+		system("cls");
 				
 				}
 				break;
@@ -668,7 +670,7 @@ int main()
 					}
 						
 					}while(op!=3);
-				
+				system("cls");
 			}
 
 				break;
@@ -741,13 +743,17 @@ int main()
 							
 
 					}while (op!=3);
-				
+				system("cls");
 				}
 
 				break;
 		}
 	}while(opcion!='6');
-	printf("Gracias por jugar. Nos vemos!");
+	system("cls");
+	if(opcion==6)
+	{
+		printf("Gracias por jugar. Nos vemos!");
+	}
 	
 
 	return 0;
