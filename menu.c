@@ -774,16 +774,16 @@ int main()
 
 				break;
 				
-		default: system("cls");
-		//printf ("No has seleccionado una opcion valida\n\n");
+			default: system("cls");
+			//printf ("No has seleccionado una opcion valida\n\n");
 		
-		}
-	}while(opcion!='f' && opcion!='F'); //|| opcion =2 || opcion =3 || opcion =4 || opcion =5 || opcion =6);
-	system("cls");
-	if(opcion==6)
-	{
-		printf("Gracias por jugar. Nos vemos!\n");
-	}
+			}
+			}while(opcion!='f' && opcion!='F'); //|| opcion =2 || opcion =3 || opcion =4 || opcion =5 || opcion =6);
+			system("cls");
+			/*if(opcion==6)
+			{
+			printf("Gracias por jugar. Nos vemos!\n");
+	}*/
 	
 	printf("Nos vemos pronto!");
 
