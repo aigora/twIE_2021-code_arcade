@@ -448,9 +448,50 @@ int main()
 				
 			break;
 			case 2: 
-				printf("Intrucciones\nEn la opcion 1 jugaras con un amigo que este contigo\nEn la opcion 2 jugaras contra la inteligencia artificial del programa\nEn la opcion 3 seras el espectador de una partida instantanea del programa consigo mismo\nEl juego consiste en alinear tres X en cualquier direccion del tablero\nmetiendo las coordenadas x y separadas pr un espacio.\n");
-			break;
+			{
+					instr *p;
+	int cont=0;
+	char temp[100];
+	char aux;
+	int i,j;
+	FILE *pf;
+	pf=fopen("Instrucciones tres en raya.txt","r");
+	if(pf==NULL)
+	{
+		printf("No se ha padido abrir el fichero\n");
+		exit(-1);
+	}
+	while(!feof(pf))
+	{
+		fgets(temp,100,pf);
+		cont++;
+	}
+	rewind(pf);
+	p=(instr*)malloc(cont*sizeof(instr));
+	if(p==NULL)
+	{
+		printf("No se ha podido reservar memoria\n");
+		exit(-1);
+	}
+	for(i=0;!feof(pf);i++)
+	{
+		vaciar(temp);
+		aux='O';
+		for(j=0;aux!='\n';j++)
+		{
+			aux=fgetc(pf);
+			if(aux!='\n')
+			{
+				temp[j]=aux;
+			}
 		}
+		copiar(temp,i,p);
+		fclose(pf);
+		printf("Instrucciones: %s \n",p[i].a);
+	}
+}
+			}
+		
 		}while(op!=3);
 				
 				}
@@ -582,12 +623,52 @@ int main()
 						 
 					case 2:
 						{
-						printf("Intrucciones\nEste juego se basa en el mitico juego del piedra papel o tijera.\n Las partidas son al mejor de 5. Para elegir una opcion se pulsa1, 2 o 3\n");
+							instr *p;
+	int cont=0;
+	char temp[100];
+	char aux;
+	int i,j;
+	FILE *pf;
+	pf=fopen("Instrucciones piedra papel o tijera.txt","r");
+	if(pf==NULL)
+	{
+		printf("No se ha padido abrir el fichero\n");
+		exit(-1);
+	}
+	while(!feof(pf))
+	{
+		fgets(temp,100,pf);
+		cont++;
+	}
+	rewind(pf);
+	p=(instr*)malloc(cont*sizeof(instr));
+	if(p==NULL)
+	{
+		printf("No se ha podido reservar memoria\n");
+		exit(-1);
+	}
+	for(i=0;!feof(pf);i++)
+	{
+		vaciar(temp);
+		aux='O';
+		for(j=0;aux!='\n';j++)
+		{
+			aux=fgetc(pf);
+			if(aux!='\n')
+			{
+				temp[j]=aux;
+			}
+		}
+		copiar(temp,i,p);
+		fclose(pf);
+		printf("Instrucciones: %s \n",p[i].a);
+	}
+}
 						break;
 					}
 						
-					}
-				}while(op!=3);
+					}while(op!=3);
+				
 			}
 
 				break;
