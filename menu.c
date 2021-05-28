@@ -82,7 +82,7 @@ int main()
 
 	do
 	{
-	printf("Selecciona juego: \n a.Pong\n b.Ahorcado\n c.Tres en ralla\n d.Piedra, papel o tijera\n e.Snake\n f.Salir\n");
+	printf("\nSelecciona juego: \n a.Pong\n b.Ahorcado\n c.Tres en ralla\n d.Piedra, papel o tijera\n e.Snake\n f.Salir\n");
 	scanf("%c",&opcion);
 	
 		switch(opcion)
@@ -169,6 +169,9 @@ int main()
 					copiar(temp,i,p);
 					fclose(pf);
 					printf("Instrucciones: %s \n",p[i].a);
+					system("pause");
+					system("cls");
+					break;
 					}
 					}
 				
@@ -460,6 +463,9 @@ int main()
 								copiar(temp,i,p);
 								fclose(pf);
 								printf("Instrucciones: %s \n",p[i].a);
+								system("pause");
+								system("cls");
+								break;
 							}
 						}
 							}
@@ -551,6 +557,9 @@ int main()
 					copiar(temp,i,p);
 					fclose(pf);
 					printf("Instrucciones: %s \n",p[i].a);
+					system("pause");
+					system("cls");
+					break;
 				}
 			}
 			}
@@ -730,6 +739,9 @@ int main()
 							copiar(temp,i,p);
 							fclose(pf);
 							printf("Instrucciones: %s \n",p[i].a);
+							system("pause");
+							system("cls");
+							break;
 						}
 						}
 						break;
@@ -768,7 +780,7 @@ int main()
 				 		case 'i':
 						case 'I':
 									{
-											instr *p;
+									instr *p;
 						int cont=0;
 						char temp[100];
 						char aux;
@@ -807,12 +819,17 @@ int main()
 							copiar(temp,i,p);
 							fclose(pf);
 							printf("Instrucciones: %s \n",p[i].a);
+							system("pause");
+							system("cls");
+							
+							break;
 						}
 					}		
 				}
 							
 
 							}while (op!='v' && op!= 'V');
+							
 					system("cls");
 				}
 
@@ -822,7 +839,8 @@ int main()
 			//printf ("No has seleccionado una opcion valida\n\n");
 		
 			}
-			}while(opcion!='f' && opcion!='F'); //|| opcion =2 || opcion =3 || opcion =4 || opcion =5 || opcion =6);
+			}while(opcion!='f' && opcion!='F');
+			
 			system("cls");
 	
 	printf("Gracias por jugar. Nos vemos pronto!!");
@@ -847,8 +865,10 @@ void borde(char pantalla[V][H])
 		{
 			if(i==0||i==V-1)
 			pantalla[i][j]='-';
+			
 			else if (j==0||j==H-1)
 			pantalla[i][j]='|';
+			
 			else
 			pantalla[i][j]=' ';
 		
@@ -859,6 +879,7 @@ void borde(char pantalla[V][H])
 void raquetaj(char pantalla[V][H], int inicioj, int finj)
 {
 	int i, j;
+	
 	for(i=inicioj;i<finj;i++)
 	{
 		for(j=1;j<=2;j++)
@@ -871,6 +892,7 @@ void raquetaj(char pantalla[V][H], int inicioj, int finj)
 void raquetaia(char pantalla[V][H], int inicioia, int finia)
 {
 	int i, j;
+	
 	for(i=inicioia;i<=finia;i++)
 	{
 		for(j= H-3;j<=H-2;j++)
@@ -888,6 +910,7 @@ void pelota(char pantalla[V][H], int X, int Y)
 void leer(char pantalla[V][H])
 {
 	int i, j;
+	
 	for (i=0;i<V;i++)
 	{
 		for (j=0;j<H;j++)
@@ -901,11 +924,13 @@ void gameloopP(char pantalla[V][H], int X, int Y, int inicioj, int finj, int ini
 {
 	int gol;
 	gol= 0;
+	
 	do
 	{
 		dibujar(pantalla);//dibuja en pantalla
 		inputP(pantalla,&X,&Y,&inicioj,&finj,&inicioia,&finia,&moverX,&moverY,&moveria,&gol);//verificacion y modificacion de posiciones
 		actualizarP(pantalla,X,Y,inicioj,finj,inicioia,finia);//actualiza la pantalla
+		
 	}while (gol==0);
 }
 
@@ -919,6 +944,7 @@ void inputP(char pantalla[V][H], int *X, int *Y, int *inicioj, int *finj, int *i
 {
 	int i;
 	char tecla;
+	
 	if(*Y==1 || *Y==V-2)//comprueba si la pelota choca arriba o abajo
 	{
 		*moverY *= -1;//cambia la direccion vertical
@@ -937,6 +963,7 @@ void inputP(char pantalla[V][H], int *X, int *Y, int *inicioj, int *finj, int *i
 			}
 		}
 	}
+	
 	if(*X == H-5)//comprueba que la pelota choca con la raqueta de la ia
 	{
 		for(i=(*inicioia);i<=(*finia);i++)
@@ -947,10 +974,12 @@ void inputP(char pantalla[V][H], int *X, int *Y, int *inicioj, int *finj, int *i
 			}
 		}
 	}
+	
 	if(*inicioia == 1 || *finia == V-1)
 	{
 		*moveria *= -1;
 	}
+	
 	if(*gol==0)
 	{
 		*X += (*moverX);
@@ -993,8 +1022,10 @@ void actualizarP(char pantalla[V][H], int X, int Y, int inicioj, int finj, int i
 void inicioS(int *longitud, char pantalla[V][H],snake a[N],comida b)
 {
 	int i;
+	
 	a[0].x =30;//coordenadas inicio serpiente
 	a[0].y = 13;
+	
 	*longitud=4;//longitud inicial serpiente
 	srand(time(NULL));//coordenadas comida
 	b.x=rand()%20;
@@ -1021,6 +1052,7 @@ void inicioS(int *longitud, char pantalla[V][H],snake a[N],comida b)
 void datos(char pantalla[V][H],int longitud, snake a[N], comida b)
 {
 	int i;
+	
 	for(i=1;i<longitud;i++)
 	{
 		a[i].x=a[i-1].x-1;//cuerpo de la serpiente
@@ -1028,6 +1060,7 @@ void datos(char pantalla[V][H],int longitud, snake a[N], comida b)
 		a[i].imagen='Z';
 	}
 	a[0].imagen='O';
+	
 	for(i=0;i<longitud;i++)
 	{
 		pantalla[a[i].y][a[i].x]=a[i].imagen;//meto imagen de la serpiente
@@ -1040,6 +1073,7 @@ void gameloopS(char pantalla[V][H], int longitud,snake a[N],comida b)
 {
 	int fin;
 	fin=0;
+	
 	do
 	{
 		system("cls");
@@ -1053,10 +1087,12 @@ void inputS(char pantalla[V][H], int *longitud, int *fin, snake a[N],comida b)
 {
 	int i;
 	char tecla;
+	
 	if(a[0].x==0||a[0].x==(H-1)||a[0].y==0||a[0].y==(V-1))//comprueba si se choca con los bordes
 	{
 		*fin =1;
 	}
+	
 	for (i=1;i<*longitud&&*fin==0;i++)
 	{
 		if(a[0].x==a[i].x&&a[0].y==a[i].y)//comprueba si la serpiente se choca con si misma
@@ -1064,6 +1100,7 @@ void inputS(char pantalla[V][H], int *longitud, int *fin, snake a[N],comida b)
 			*fin=1;
 		}
 	}
+	
 	if(a[0].x==b.x&&a[0].y==b.y)
 	{
 		*longitud +=1;
@@ -1119,6 +1156,7 @@ void actualizarS(char pantalla[V][H], int longitud,snake a[N],comida b)
 void datos2(char pantalla[V][H], int longitud, snake a[N], comida b)
 {
 	int i;
+	
 	for(i=(longitud-1);i>0;i--)
 	{
 		a[i].x=a[i-1].x;
@@ -1126,6 +1164,7 @@ void datos2(char pantalla[V][H], int longitud, snake a[N], comida b)
 	}
 	a[0].x +=a[0].moverX;
 	a[0].y +=a[0].moverY;
+	
 	for(i=0;i<longitud;i++)
 	{
 		pantalla[a[i].y][a[i].x]=a[i].imagen;
@@ -1145,11 +1184,13 @@ clean(tablero);
 char jugador_turno = Jug_X;
 
 printf("\nEmpezara el jugador: %c\n", jugador_turno);
+
 int x, y;
 
 while (1)
 {
     print(tablero);
+    
     if (mode == Jug_Jug || (mode == Jug_IA && jugador_turno == Jug_X))
     {
         printf("Introduce las coordenadas Jugador %c: \n", jugador_turno);
@@ -1169,6 +1210,7 @@ while (1)
         printf("Ha ganado el jugador %c !!\n", jugador_turno);
      return;
     }
+    
     else if (tie(tablero))
     {
         print(tablero);
@@ -1188,6 +1230,7 @@ void duplicarMatriz(char origMesa[3][3], char final[3][3])
 void clean(char tablero[3][3])
 {
     int y;
+    
     for (y = 0; y < 3; y++)
     {
         int x;
@@ -1204,14 +1247,17 @@ void print(char tablero[3][3])
     int y;
     int x;
     printf("| ");
+    
     for (x = 0; x < 3; x++)
     {
         printf("|%d", x + 1);
     }
     printf("|\n");
+    
     for (y = 0; y < 3; y++)
     {
         printf("|%d", y + 1);
+        
         for (x = 0; x < 3; x++)
         {
             printf("|%c", tablero[y][x]);
@@ -1251,6 +1297,7 @@ int up(int x, int y, char jugador, char tablero[3][3])
 {
     int yInicio = (y - verificar_ganador >= 0) ? y - verificar_ganador + 1 : 0;
     int contador = 0;
+    
     for (; yInicio <= y; yInicio++)
     {
         if (tablero[yInicio][x] == jugador)
@@ -1269,6 +1316,7 @@ int right(int x, int y, char jugador, char tablero[3][3])
 {
     int xFin = (x + verificar_ganador < 3) ? x + verificar_ganador - 1 : 3 - 1;
     int contador = 0;
+    
     for (; x <= xFin; x++)
     {
         if (tablero[y][x] == jugador)
@@ -1309,6 +1357,7 @@ int downRight(int x, int y, char jugador, char tablero[3][3])
     int xFin = (x + verificar_ganador < 3) ? x + verificar_ganador - 1 : 3 - 1;
     int yFin = (y + verificar_ganador < 3) ? y + verificar_ganador - 1 : 3 - 1;
     int contador = 0;
+    
     while (x <= xFin && y <= yFin)
     {
         if (tablero[y][x] == jugador)
@@ -1328,9 +1377,11 @@ int downRight(int x, int y, char jugador, char tablero[3][3])
 int verificarVictoria(char jugador, char tablero[3][3])
 {
     int y;
+    
     for (y = 0; y < 3; y++)
     {
         int x;
+        
         for (x = 0; x < 3; x++)
         {
             if (
@@ -1366,9 +1417,11 @@ void imprimir_texto(char *mensaje, char jugador)
 int tie(char origMesa[3][3])
 {
     int y;
+    
     for (y = 0; y < 3; y++)
     {
         int x;
+        
         for (x = 0; x < 3; x++)
         {
             if (origMesa[y][x] == ' ')
@@ -1400,14 +1453,17 @@ void ganar_coordenadas(char jugador, char origMesa[3][3], int *yFin, int *xFin)
 {
     char coipaMesa[3][3];
     int y, x;
+    
     for (y = 0; y < 3; y++)
     {
         for (x = 0; x < 3; x++)
         {
             duplicarMatriz(origMesa, coipaMesa);
+            
             if (empty(y, x, coipaMesa))
             {
                 jugar(y, x, jugador, coipaMesa);
+                
                 if (verificarVictoria(jugador, coipaMesa))
                 {
                     *yFin = y;
@@ -1423,29 +1479,34 @@ int contar(char jugador, char coipaMesa[3][3])
 {
     int cont_tot = 0;
     int x, y;
+    
     for (y = 0; y < 3; y++)
     {
         for (x = 0; x < 3; x++)
         {
             int cont_temp;
             cont_temp = up(x, y, jugador, coipaMesa);
+            
             if (cont_temp > cont_tot)
             {
                 cont_tot = cont_temp;
             }
             cont_temp = upRight(x, y, jugador, coipaMesa);
+            
             if (cont_temp > cont_tot)
             {
                 cont_tot = cont_temp;
             }
 
             cont_temp = right(x, y, jugador, coipaMesa);
+            
             if (cont_temp > cont_tot)
             {
                 cont_tot = cont_temp;
             }
 
             cont_temp = downRight(x, y, jugador, coipaMesa);
+            
             if (cont_temp > cont_tot)
             {
                 cont_tot = cont_temp;
@@ -1462,17 +1523,20 @@ void puntos_coordenadas(char jugador, char origMesa[3][3], int *yFin, int *xFin,
     int cont_tot = 0,
         xcont_tot = -1,
         ycont_tot = -1;
+        
     for (y = 0; y < 3; y++)
     {
         for (x = 0; x < 3; x++)
         {
             duplicarMatriz(origMesa, coipaMesa);
+            
             if (!empty(y, x, coipaMesa))
             {
                 continue;
             }
             jugar(y, x, jugador, coipaMesa);
             int cont_temp = contar(jugador, coipaMesa);
+            
             if (cont_temp > cont_tot)
             {
                 cont_tot = cont_temp;
@@ -1492,6 +1556,7 @@ void IA_coordenadas(char jugador, char tablero[3][3], int *yFin, int *xFin)
     int y, x, cont_Jug, cont_riv;
     char oponente = rival(jugador);
     ganar_coordenadas(jugador, tablero, &y, &x);
+    
     if (y != -1 && x != -1)
     {
         imprimir_texto("Voy a ganar", jugador);
@@ -1500,6 +1565,7 @@ void IA_coordenadas(char jugador, char tablero[3][3], int *yFin, int *xFin)
         return;
     }
     ganar_coordenadas(oponente, tablero, &y, &x);
+    
     if (y != -1 && x != -1)
     {
         imprimir_texto("Impido que gane mi rival", jugador);
@@ -1509,6 +1575,7 @@ void IA_coordenadas(char jugador, char tablero[3][3], int *yFin, int *xFin)
     }
     puntos_coordenadas(jugador, tablero, &y, &x, &cont_Jug);
     puntos_coordenadas(oponente, tablero, &y, &x, &cont_riv);
+    
     if (cont_riv > cont_Jug)
     {
         imprimir_texto("Busco mi victoria", jugador);
@@ -1538,6 +1605,7 @@ void IA_coordenadas(char jugador, char tablero[3][3], int *yFin, int *xFin)
 void vaciar(char temp[])
 {
 	int i;
+	
 	for(i=0;i<100;i++)
 	{
 		temp[i]='\0';
