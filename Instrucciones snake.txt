@@ -1,0 +1,2 @@
+el juego consiste en comer la comida y crecer.Para ir hacia arriba pulsa w, abajo x, derecha d e izquierda a
+.

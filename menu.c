@@ -131,7 +131,7 @@ int main()
 	char aux;
 	int i,j;
 	FILE *pf;
-	pf=fopen("Instrucciones.txt","r");
+	pf=fopen("Instrucciones pong.txt","r");
 	if(pf==NULL)
 	{
 		printf("No se ha padido abrir el fichero\n");
@@ -167,7 +167,7 @@ int main()
 	}
 }
 			
-			
+		}
 			}while(op!=3);
 }
 		system("cls");
@@ -366,10 +366,52 @@ int main()
 							}
 					
 						case 2:
-							printf("Instrucciones:");
+							{
+									instr *p;
+							int cont=0;
+							char temp[100];
+							char aux;
+							int i,j;
+							FILE *pf;
+							pf=fopen("Instrucciones ahorcado.txt","r");
+							if(pf==NULL)
+							{
+								printf("No se ha padido abrir el fichero\n");
+								exit(-1);
+							}
+							while(!feof(pf))
+							{
+								fgets(temp,100,pf);
+								cont++;
+							}
+							rewind(pf);
+							p=(instr*)malloc(cont*sizeof(instr));
+							if(p==NULL)
+							{
+								printf("No se ha podido reservar memoria\n");
+								exit(-1);
+							}
+							for(i=0;!feof(pf);i++)
+							{
+								vaciar(temp);
+								aux='O';
+								for(j=0;aux!='\n';j++)
+								{
+									aux=fgetc(pf);
+									if(aux!='\n')
+									{
+										temp[j]=aux;
+									}
+								}
+								copiar(temp,i,p);
+								fclose(pf);
+								printf("Instrucciones: %s \n",p[i].a);
+							}
+						}
+							}
 							break;
-				}
 				}while(op!=3);
+				}
 
 
 				break;
@@ -573,9 +615,49 @@ int main()
 									}
 								case 2:
 									{
-										printf("Instrucciones:\n El juego consiste en ir comiendose la comida para hacerse mas grande sin chocarse con los bordes.\nControles:\nPulsa w para desplazarte hacia arriba.\nPulsa X para desplazarte hacia abajo.\nPulsa A para moverte hacia la izquierda.\nPulsa D para moverte a la derecha.\n");
+											instr *p;
+	int cont=0;
+	char temp[100];
+	char aux;
+	int i,j;
+	FILE *pf;
+	pf=fopen("Instrucciones snake.txt","r");
+	if(pf==NULL)
+	{
+		printf("No se ha padido abrir el fichero\n");
+		exit(-1);
+	}
+	while(!feof(pf))
+	{
+		fgets(temp,100,pf);
+		cont++;
+	}
+	rewind(pf);
+	p=(instr*)malloc(cont*sizeof(instr));
+	if(p==NULL)
+	{
+		printf("No se ha podido reservar memoria\n");
+		exit(-1);
+	}
+	for(i=0;!feof(pf);i++)
+	{
+		vaciar(temp);
+		aux='O';
+		for(j=0;aux!='\n';j++)
+		{
+			aux=fgetc(pf);
+			if(aux!='\n')
+			{
+				temp[j]=aux;
+			}
+		}
+		copiar(temp,i,p);
+		fclose(pf);
+		printf("Instrucciones: %s \n",p[i].a);
+	}
+}
 									}
-							}
+							
 
 					}while (op!=3);
 				
@@ -583,8 +665,8 @@ int main()
 
 				break;
 		}
-	}
-}	while(opcion!='6');
+	}while(opcion!='6');
+	
 
 	return 0;
 }
