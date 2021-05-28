@@ -93,7 +93,7 @@ int main()
 	int op;
 	do
 	{	
-	printf("Bienvenido al juego del pong. Para comenzar pulse 1, 2 para ver las instrucciones o 3 para volver al inicio");
+	printf("Bienvenido al juego del pong. Para comenzar pulse 1, 2 para ver las instrucciones o 3 para volver al inicio\n");
 	scanf("%i",&op);
 	
 	switch(op)
@@ -187,6 +187,7 @@ int main()
 					{
 						case 1:
 							{
+								fflush(stdin);
 								srand(time(NULL));
 	
 								char palabras[][30] = {
@@ -257,7 +258,7 @@ int main()
 								// para palabra aleatoria
 								int azar = rand() % 60;
 								
-								int vidas = 5;
+								int vidas = 6;
 								int numAciertos = 0;
 								int segCorrecta = 0;
 								
@@ -302,7 +303,7 @@ int main()
 									fgets(adivina, 16, stdin);
 									//fflush(stdin);
 									
-							
+									
 									
 									if( strncmp(adivina, "salir", 4) == 0) {
 										salir = 1;
@@ -311,9 +312,9 @@ int main()
 									
 									letraintro = adivina[0];
 									preadivinada = 0; 
-									system("cls");
 									
 									printf("\nLetra Introducida:%c\n",letraintro);
+									
 									
 									
 									segCorrecta = numAciertos;
@@ -350,7 +351,7 @@ int main()
 									} else {
 										printf("Es correcta!! :)\n");
 									}
-									
+									//system("cls");
 								}
 								
 								if( salir == 1 ) {	
@@ -361,7 +362,8 @@ int main()
 									palabras[azar]);	
 									
 								} else  {	
-									printf("\nHAS GANADO!!! :)\n");
+									printf("\nHAS GANADO!!! :)\nLa palabra era: %s\n",
+									palabras[azar]);
 								} 
 	
 		
@@ -424,7 +426,7 @@ int main()
 		int op;
 		do
 		{	
-		printf("Bienvenido al juego del Tres en Raya. Para comenzar pulse 1, 2 para ver las instrucciones o 3 para volver al inicio");
+		printf("Bienvenido al juego del Tres en Raya. Para comenzar pulse 1, 2 para ver las instrucciones o 3 para volver al inicio\n");
 		scanf("%i",&op);
 	
 		switch(op)
@@ -436,7 +438,7 @@ int main()
  int mode;
     printf("Bienvenido, estas jugando al TRES EN RAYA!!\n");
  do{
-    printf("1. Jugador1 - Jugador2\n2. Jugador - Maquina\n3.Maquina - Maquina\n4. Salir\n");
+    printf("1. Jugador1 - Jugador2\n2. Jugador - Maquina\n3. Maquina - Maquina\n4. Salir\n");
     printf("Elige una de las opciones disponibles: ");
     scanf("%d", &mode);
     }while (mode !=1 && mode !=2 && mode !=3 && mode !=4);
@@ -755,7 +757,7 @@ int main()
 	system("cls");
 	if(opcion==6)
 	{
-		printf("Gracias por jugar. Nos vemos!");
+		printf("Gracias por jugar. Nos vemos!\n");
 	}
 	
 
@@ -1104,7 +1106,7 @@ while (1)
     else if (tie(tablero))
     {
         print(tablero);
-        printf("Habeis empatado!!");
+        printf("Habeis empatado!!\n");
      return;
     }
     jugador_turno = rival(jugador_turno);
@@ -1162,18 +1164,18 @@ void jugar(int y, int x, char pieza, char tablero[3][3])
 {
     if (y < 0 || y >= 3)
     {
-        printf("casilla erronea, pierdes tu turno.");
+        printf("casilla erronea, pierdes tu turno\n");
         return;
     }
 
     if (x < 0 || x >= 3)
     {
-        printf("casilla erronea, pierdes tu turno");
+        printf("casilla erronea, pierdes tu turno\n");
         return;
     }
     if (!empty(y, x, tablero))
     {
-        printf("Casilla ocupada, pierdes tu turno.");
+        printf("Casilla ocupada, pierdes tu turno\n");
         return;
     }
     tablero[y][x] = pieza;
